@@ -85,8 +85,17 @@ button{font-family:inherit;cursor:pointer}
 }
 .nav.scrolled .nav__logo img{height:32px}
 /* Stacked logo crossfade: white (hero) → dark ink (scrolled) */
-.nav__logo .logo-light{position:absolute;left:0;top:50%;transform:translateY(-50%);opacity:1;transition:opacity .4s var(--ease)}
-.nav__logo .logo-dark{opacity:0;transition:opacity .4s var(--ease)}
+.nav__logo .logo-light{
+  position:absolute;left:0;top:50%;transform:translateY(-50%);
+  height:38px;width:auto;opacity:1;
+  transition:opacity .4s var(--ease), height .35s var(--ease);
+}
+.nav__logo .logo-dark{
+  height:38px;width:auto;opacity:0;
+  transition:opacity .4s var(--ease), height .35s var(--ease);
+}
+.nav.scrolled .nav__logo .logo-light,
+.nav.scrolled .nav__logo .logo-dark{height:32px}
 .nav.scrolled .nav__logo .logo-light{opacity:0}
 .nav.scrolled .nav__logo .logo-dark{opacity:1}
 .wordmark{
