@@ -80,22 +80,19 @@ button{font-family:inherit;cursor:pointer}
 .nav__inner{display:flex;align-items:center;justify-content:space-between;gap:18px}
 .nav__logo{display:flex;align-items:center;gap:10px;text-decoration:none;position:relative}
 .nav__logo img{
-  height:38px;width:auto;
-  transition:height .35s var(--ease), opacity .4s var(--ease);
+  height:32px;width:auto;
+  transition:opacity .4s var(--ease);
 }
-.nav.scrolled .nav__logo img{height:32px}
 /* Stacked logo crossfade: white (hero) → dark ink (scrolled) */
 .nav__logo .logo-light{
   position:absolute;left:0;top:50%;transform:translateY(-50%);
-  height:38px;width:auto;opacity:1;
-  transition:opacity .4s var(--ease), height .35s var(--ease);
+  height:32px;width:auto;opacity:1;
+  transition:opacity .4s var(--ease);
 }
 .nav__logo .logo-dark{
-  height:38px;width:auto;opacity:0;
-  transition:opacity .4s var(--ease), height .35s var(--ease);
+  height:32px;width:auto;opacity:0;
+  transition:opacity .4s var(--ease);
 }
-.nav.scrolled .nav__logo .logo-light,
-.nav.scrolled .nav__logo .logo-dark{height:32px}
 .nav.scrolled .nav__logo .logo-light{opacity:0}
 .nav.scrolled .nav__logo .logo-dark{opacity:1}
 .wordmark{
