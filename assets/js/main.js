@@ -324,78 +324,80 @@
       .then(function(data){
         PORTFOLIO_DATA = data;
 
-        // For the homepage, curate: prefer titled items, diverse categories, no duplicate projects
+        // For the homepage, curate: diverse items per filter, no duplicate projects
         if(!isGalleryPage){
           var seenProjects = {};  // dedupe by base project name
-          var seenCats = {};      // limit per category
           var curated = [];
+          var curatedIds = {};    // track item ids to avoid dups
 
           // Helper: extract core project name for deduplication
-          // Strips dates, trailing numbers, category suffixes, and common noise words
           function baseName(title){
             var t = title;
-            // Strip leading date "2022-12-12 "
             t = t.replace(/^\d{4}-\d{2}-\d{2}\s*/i, '');
-            // Strip trailing number variants "01", " 2", "9.4"
             t = t.replace(/\s+\d+(\.\d+)?$/i, '');
-            // Strip category/suffix keywords
             t = t.replace(/\s*(3D LED SIGNAGE|LED SIGNAGE|3D SIGNAGE|SIGNAGE|SIGN|METALBOARD|INKJET STICKER|WALLPAPER|WALL MURAL)$/i, '');
-            // Strip ADJUST/AFTER/BEFORE
             t = t.replace(/\s+(ADJUST|AFTER|BEFORE)$/i, '');
-            // Extract just the first word(s) — the actual brand/project name
-            // e.g. "AMLEX 3D LED SIGNAGE" → "amlex", "FONG SENG HARDWARE" → "fong seng hardware"
             t = t.trim().toLowerCase();
-            // If multiple words, take first 2 as the key (handles "FONG SENG" vs "FONG SENG HARDWARE")
             var parts = t.split(/\s+/);
             return parts.slice(0, 2).join(' ');
           }
 
-          // Helper: check if image is landscape (better for grid display)
+          // Dedup key: project name for titled items, unique id for untitled
+          function dedupKey(item){
+            var isTitled = item.title !== item.category_label;
+            return isTitled ? baseName(item.title) : item.id;
+          }
+
           function isLandscape(item){
             return item.width >= item.height;
           }
 
-          // Pass 1: titled, landscape, one per project name, max 2 per category
-          data.items.forEach(function(item){
-            var isTitled = item.title !== item.category_label;
-            if(!isTitled || !isLandscape(item)) return;
-
-            var bn = baseName(item.title);
-            var cat = item.category;
-
-            if(seenProjects[bn]) return;
-            if(!seenCats[cat]) seenCats[cat] = 0;
-            if(seenCats[cat] >= 2) return;
-
+          function tryAdd(item){
+            if(curatedIds[item.id]) return false;
+            var key = dedupKey(item);
+            if(seenProjects[key]) return false;
             curated.push(item);
-            seenProjects[bn] = true;
-            seenCats[cat]++;
-          });
-
-          // Pass 2: fill remaining with any unique project, landscape first
-          if(curated.length < 12){
-            data.items.forEach(function(item){
-              if(curated.length >= 12) return;
-              if(!isLandscape(item)) return;
-              if(curated.indexOf(item) !== -1) return;
-
-              var bn = baseName(item.title);
-              if(seenProjects[bn]) return;
-
-              curated.push(item);
-              seenProjects[bn] = true;
-            });
+            curatedIds[item.id] = true;
+            seenProjects[key] = true;
+            return true;
           }
 
-          // Pass 3: last resort fill with any
-          if(curated.length < 12){
-            data.items.forEach(function(item){
-              if(curated.length >= 12) return;
-              if(curated.indexOf(item) !== -1) return;
-              var bn = baseName(item.title);
-              if(seenProjects[bn]) return;
-              curated.push(item);
-              seenProjects[bn] = true;
+          // Filters shown on homepage that need coverage
+          var homeFilters = ['3d-signage','3d-led','lightbox','billboard','banner','vehicle'];
+          var MIN_PER = 2, MAX_PER = 5;
+          var catCount = {};
+
+          // Pass 1: pick MIN landscape items per filter
+          homeFilters.forEach(function(cat){
+            catCount[cat] = 0;
+            var pool = data.items.filter(function(i){ return i.category === cat && isLandscape(i); });
+            pool.forEach(function(item){
+              if(catCount[cat] >= MIN_PER) return;
+              if(tryAdd(item)) catCount[cat]++;
+            });
+            // If not enough landscape, fill with portrait
+            if(catCount[cat] < MIN_PER){
+              var portraitPool = data.items.filter(function(i){ return i.category === cat && !isLandscape(i); });
+              portraitPool.forEach(function(item){
+                if(catCount[cat] >= MIN_PER) return;
+                if(tryAdd(item)) catCount[cat]++;
+              });
+            }
+          });
+
+          // Pass 2: top up toward MAX, landscape only, round-robin across filters
+          var changed = true;
+          while(changed){
+            changed = false;
+            homeFilters.forEach(function(cat){
+              if(catCount[cat] >= MAX_PER) return;
+              var pool = data.items.filter(function(i){
+                return i.category === cat && isLandscape(i) && !curatedIds[i.id];
+              });
+              pool.forEach(function(item){
+                if(catCount[cat] >= MAX_PER) return;
+                if(tryAdd(item)){ catCount[cat]++; changed = true; }
+              });
             });
           }
 
