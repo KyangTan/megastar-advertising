@@ -78,9 +78,17 @@ button{font-family:inherit;cursor:pointer}
   padding:9px 0;
 }
 .nav__inner{display:flex;align-items:center;justify-content:space-between;gap:18px}
-.nav__logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.nav__logo img{height:38px;width:auto;transition:height .35s var(--ease)}
+.nav__logo{display:flex;align-items:center;gap:10px;text-decoration:none;position:relative}
+.nav__logo img{
+  height:38px;width:auto;
+  transition:height .35s var(--ease), opacity .4s var(--ease);
+}
 .nav.scrolled .nav__logo img{height:32px}
+/* Stacked logo crossfade: white (hero) → dark ink (scrolled) */
+.nav__logo .logo-light{position:absolute;left:0;top:50%;transform:translateY(-50%);opacity:1;transition:opacity .4s var(--ease)}
+.nav__logo .logo-dark{opacity:0;transition:opacity .4s var(--ease)}
+.nav.scrolled .nav__logo .logo-light{opacity:0}
+.nav.scrolled .nav__logo .logo-dark{opacity:1}
 .wordmark{
   font-family:var(--font-display);font-weight:700;text-transform:uppercase;
   font-size:1.4rem;letter-spacing:.06em;color:var(--ink);line-height:1;
@@ -98,6 +106,11 @@ button{font-family:inherit;cursor:pointer}
 }
 .nav__links a:hover,.nav__links a.active{color:var(--ink)}
 .nav__links a.active::after{width:100%}
+
+/* On hero (not scrolled): white links over dark bg */
+.nav:not(.scrolled) .nav__links a{color:rgba(255,255,255,.85)}
+.nav:not(.scrolled) .nav__links a:hover,
+.nav:not(.scrolled) .nav__links a.active{color:#fff}
 
 /* CTA button */
 .btn{
@@ -130,8 +143,12 @@ button{font-family:inherit;cursor:pointer}
 }
 .burger span{
   position:absolute;left:11px;right:11px;height:3px;background:var(--ink);border-radius:2px;
-  transition:transform .35s var(--ease), opacity .25s var(--ease), top .35s var(--ease);
+  transition:transform .35s var(--ease), opacity .25s var(--ease), top .35s var(--ease), background .35s var(--ease);
 }
+/* White burger on hero (not scrolled) */
+.nav:not(.scrolled) ~ .burger span,
+.nav:not(.scrolled) .burger span{background:#fff}
+body.menu-open .burger span{background:#fff}
 .burger span:nth-child(1){top:15px}
 .burger span:nth-child(2){top:21.5px}
 .burger span:nth-child(3){top:28px}
