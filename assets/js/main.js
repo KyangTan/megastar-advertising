@@ -129,7 +129,7 @@
   var PORTFOLIO_DATA = null;
   var activeFilter = 'all';
   var visibleCount = 0;
-  var PAGE_SIZE = isGalleryPage ? 24 : 12;
+  var PAGE_SIZE = isGalleryPage ? 24 : 18;
   var lightboxIndex = 0;
   var lightboxItems = []; // currently visible items for lightbox nav
 
@@ -330,9 +330,24 @@
           var seenCats = {};      // limit per category
           var curated = [];
 
-          // Helper: extract base project name (strip trailing " 01", " 2", etc.)
+          // Helper: extract core project name for deduplication
+          // Strips dates, trailing numbers, category suffixes, and common noise words
           function baseName(title){
-            return title.replace(/\s+\d+(\.\d+)?$/i, '').trim().toLowerCase();
+            var t = title;
+            // Strip leading date "2022-12-12 "
+            t = t.replace(/^\d{4}-\d{2}-\d{2}\s*/i, '');
+            // Strip trailing number variants "01", " 2", "9.4"
+            t = t.replace(/\s+\d+(\.\d+)?$/i, '');
+            // Strip category/suffix keywords
+            t = t.replace(/\s*(3D LED SIGNAGE|LED SIGNAGE|3D SIGNAGE|SIGNAGE|SIGN|METALBOARD|INKJET STICKER|WALLPAPER|WALL MURAL)$/i, '');
+            // Strip ADJUST/AFTER/BEFORE
+            t = t.replace(/\s+(ADJUST|AFTER|BEFORE)$/i, '');
+            // Extract just the first word(s) — the actual brand/project name
+            // e.g. "AMLEX 3D LED SIGNAGE" → "amlex", "FONG SENG HARDWARE" → "fong seng hardware"
+            t = t.trim().toLowerCase();
+            // If multiple words, take first 2 as the key (handles "FONG SENG" vs "FONG SENG HARDWARE")
+            var parts = t.split(/\s+/);
+            return parts.slice(0, 2).join(' ');
           }
 
           // Helper: check if image is landscape (better for grid display)
