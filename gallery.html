@@ -41,8 +41,13 @@
     <nav class="nav__links" aria-label="Primary">
       <a href="index.html#services">Services</a>
       <a href="index.html#why">Why Us</a>
-      <a href="index.html#work">Work</a>
-      <a href="gallery.html" class="active">Gallery</a>
+      <span class="nav__dropdown">
+        <a href="index.html#work" class="nav__dropdown-toggle">Work <span class="nav__caret" aria-hidden="true">▾</span></a>
+        <span class="nav__dropdown-menu">
+          <a href="index.html#work">Featured Work</a>
+          <a href="gallery.html">Full Gallery</a>
+        </span>
+      </span>
       <a href="index.html#contact">Contact</a>
     </nav>
     <a href="https://wa.me/60167475921?text=Hi%20Megastar%2C%20I'd%20like%20a%20quote" class="btn" target="_blank" rel="noopener">
