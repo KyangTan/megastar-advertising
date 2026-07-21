@@ -222,6 +222,26 @@
     });
   });
 
+  /* ---------- Mobile filter scroll hint ---------- */
+  var filterBars = document.querySelectorAll('.filters-sticky .filters, .filters');
+  filterBars.forEach(function(bar){
+    var parent = bar.closest('.filters-sticky') || bar;
+    function updateScrollHint(){
+      if(bar.scrollWidth > bar.clientWidth + 4){
+        // Show hint if not scrolled to end
+        if(bar.scrollLeft < bar.scrollWidth - bar.clientWidth - 20){
+          parent.classList.add('scrollable');
+        } else {
+          parent.classList.remove('scrollable');
+        }
+      }
+    }
+    bar.addEventListener('scroll', updateScrollHint, {passive:true});
+    // Initial check after layout
+    setTimeout(updateScrollHint, 200);
+    window.addEventListener('resize', updateScrollHint);
+  });
+
   // Load more button (gallery page)
   var loadMoreBtn = document.getElementById('load-more');
   if(loadMoreBtn){

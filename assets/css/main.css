@@ -433,9 +433,22 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
   .clink{flex-wrap:wrap}
   .clink .arr{display:none}
 
-  /* Filters: compact on mobile */
-  .filters{gap:6px;margin-bottom:20px}
-  .filter{padding:8px 14px;font-size:.72rem}
+  /* Filters: horizontal scroll-snap carousel on mobile */
+  .filters{
+    gap:8px;margin-bottom:20px;
+    flex-wrap:nowrap;overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:8px;
+    scrollbar-width:none;          /* Firefox */
+    scroll-padding-left:0;
+  }
+  .filters::-webkit-scrollbar{display:none}  /* Chrome/Safari */
+  .filter{
+    padding:8px 14px;font-size:.72rem;
+    scroll-snap-align:start;
+    white-space:nowrap;flex-shrink:0;
+  }
   .filters-sticky{padding:12px 0;top:60px}
 
   /* Tighter section padding on mobile */
@@ -454,3 +467,12 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
   .pgallery{grid-template-columns:1fr}
   .filter{padding:7px 11px;font-size:.68rem}
 }
+
+/* Hint that filter bar is scrollable: gradient fade on right edge */
+.filters-sticky{position:relative}
+.filters-sticky::after{
+  content:"";position:absolute;top:0;right:0;bottom:8px;width:40px;
+  background:linear-gradient(to right,transparent,var(--bg) 80%);
+  pointer-events:none;opacity:0;transition:opacity .3s;
+}
+.filters-sticky.scrollable::after{opacity:1}
