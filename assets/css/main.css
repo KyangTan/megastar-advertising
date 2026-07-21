@@ -449,7 +449,7 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
     scroll-snap-align:start;
     white-space:nowrap;flex-shrink:0;
   }
-  .filters-sticky{padding:12px 0;top:60px}
+  .filters-sticky{padding:12px 0;top:60px;background:rgba(251,250,247,.97)}
 
   /* Tighter section padding on mobile */
   .section{padding:clamp(48px,12vw,80px) 0}
