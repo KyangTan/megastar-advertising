@@ -324,31 +324,66 @@
       .then(function(data){
         PORTFOLIO_DATA = data;
 
-        // For the homepage, curate: prefer titled items and diverse categories
+        // For the homepage, curate: prefer titled items, diverse categories, no duplicate projects
         if(!isGalleryPage){
-          // Pick best items: prefer titled, landscape, spread across categories
-          var seen = {};
+          var seenProjects = {};  // dedupe by base project name
+          var seenCats = {};      // limit per category
           var curated = [];
-          // First pass: titled items, diverse categories
+
+          // Helper: extract base project name (strip trailing " 01", " 2", etc.)
+          function baseName(title){
+            return title.replace(/\s+\d+(\.\d+)?$/i, '').trim().toLowerCase();
+          }
+
+          // Helper: check if image is landscape (better for grid display)
+          function isLandscape(item){
+            return item.width >= item.height;
+          }
+
+          // Pass 1: titled, landscape, one per project name, max 2 per category
           data.items.forEach(function(item){
             var isTitled = item.title !== item.category_label;
-            var key = item.category;
-            if(isTitled){
-              if(!seen[key]) seen[key] = 0;
-              if(seen[key] < 4){
-                curated.push(item);
-                seen[key]++;
-              }
-            }
+            if(!isTitled || !isLandscape(item)) return;
+
+            var bn = baseName(item.title);
+            var cat = item.category;
+
+            if(seenProjects[bn]) return;
+            if(!seenCats[cat]) seenCats[cat] = 0;
+            if(seenCats[cat] >= 2) return;
+
+            curated.push(item);
+            seenProjects[bn] = true;
+            seenCats[cat]++;
           });
-          // Fill remaining with any items
-          if(curated.length < 24){
+
+          // Pass 2: fill remaining with any unique project, landscape first
+          if(curated.length < 12){
             data.items.forEach(function(item){
-              if(curated.indexOf(item) === -1 && curated.length < 24){
-                curated.push(item);
-              }
+              if(curated.length >= 12) return;
+              if(!isLandscape(item)) return;
+              if(curated.indexOf(item) !== -1) return;
+
+              var bn = baseName(item.title);
+              if(seenProjects[bn]) return;
+
+              curated.push(item);
+              seenProjects[bn] = true;
             });
           }
+
+          // Pass 3: last resort fill with any
+          if(curated.length < 12){
+            data.items.forEach(function(item){
+              if(curated.length >= 12) return;
+              if(curated.indexOf(item) !== -1) return;
+              var bn = baseName(item.title);
+              if(seenProjects[bn]) return;
+              curated.push(item);
+              seenProjects[bn] = true;
+            });
+          }
+
           PORTFOLIO_DATA.items = curated;
         }
 
