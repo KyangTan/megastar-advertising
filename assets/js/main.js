@@ -65,7 +65,7 @@
   }
 
   /* ---------- Scrollspy ---------- */
-  var sections = ['services','why','work','contact'].map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  var sections = ['services','facilities','work','contact'].map(function(id){ return document.getElementById(id); }).filter(Boolean);
   var navlinks = document.querySelectorAll('.nav__links a');
   if('IntersectionObserver' in window && sections.length > 0){
     var spy = new IntersectionObserver(function(entries){
