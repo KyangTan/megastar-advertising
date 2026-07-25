@@ -307,8 +307,31 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
   width:100%;height:180px;border-radius:12px;overflow:hidden;margin-bottom:20px;
   position:relative;background:var(--bg-alt);
 }
-.scard__img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.scard__img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease), opacity .3s}
 .scard-link:hover .scard__img img{transform:scale(1.08)}
+
+/* Card image navigation arrows */
+.scard__nav{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+  width:36px;height:36px;border-radius:50%;border:0;
+  background:rgba(0,0,0,.5);color:#fff;font-size:1.4rem;line-height:1;
+  display:grid;place-items:center;cursor:pointer;opacity:0;
+  transition:opacity .3s var(--ease), background .25s, transform .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.scard__nav--prev{left:8px}
+.scard__nav--next{right:8px}
+.scard__img:hover .scard__nav{opacity:1}
+.scard__nav:hover{background:var(--red)}
+.scard__nav:active{transform:translateY(-50%) scale(.9)}
+.scard__counter{
+  position:absolute;bottom:8px;right:8px;z-index:3;
+  background:rgba(0,0,0,.55);color:#fff;font-size:.72rem;font-weight:600;
+  padding:3px 10px;border-radius:999px;pointer-events:none;
+  letter-spacing:.03em;
+}
+/* Touch devices: always show arrows */
+@media (hover:none){ .scard__nav{opacity:.85} }
 
 /* Facilities section uses simple cards (no image, no icon) */
 .facilities .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
