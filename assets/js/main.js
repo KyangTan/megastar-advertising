@@ -65,7 +65,7 @@
   }
 
   /* ---------- Scrollspy ---------- */
-  var sections = ['services','why','work','contact'].map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  var sections = ['services','facilities','work','contact'].map(function(id){ return document.getElementById(id); }).filter(Boolean);
   var navlinks = document.querySelectorAll('.nav__links a');
   if('IntersectionObserver' in window && sections.length > 0){
     var spy = new IntersectionObserver(function(entries){
@@ -120,6 +120,51 @@
       card.addEventListener('mouseleave', function(){ card.style.transform = ''; });
     });
   }
+
+  /* ---------- Service card image carousel ---------- */
+  document.querySelectorAll('.scard-link').forEach(function(link){
+    var images = link.getAttribute('data-images');
+    if(!images) return;
+    try { images = JSON.parse(images); } catch(e){ return; }
+    if(!images.length) return;
+
+    var img = link.querySelector('.scard__img img');
+    var counter = link.querySelector('.scard__counter');
+    var current = 0;
+
+    // Preload all images for snappy switching
+    images.forEach(function(src){
+      var pre = new Image();
+      pre.src = src;
+    });
+
+    function show(idx){
+      current = (idx + images.length) % images.length;
+      img.style.opacity = '0';
+      setTimeout(function(){
+        img.src = images[current];
+        img.style.opacity = '1';
+      }, 150);
+      if(counter) counter.textContent = (current + 1) + ' / ' + images.length;
+    }
+
+    var prevBtn = link.querySelector('.scard__nav--prev');
+    var nextBtn = link.querySelector('.scard__nav--next');
+    if(prevBtn){
+      prevBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        show(current - 1);
+      });
+    }
+    if(nextBtn){
+      nextBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        show(current + 1);
+      });
+    }
+  });
 
   /* ============================================================
      PORTFOLIO: Load from JSON, render, filter, lightbox

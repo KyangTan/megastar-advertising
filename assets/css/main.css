@@ -277,7 +277,7 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
 .ticker__item .dot{width:9px;height:9px;border-radius:50%;background:var(--red);margin-right:28px}
 .ticker__item.amber{color:var(--amber)}
 
-/* ============== SERVICES (expanded to 8) ============== */
+/* ============== SERVICES (8 cards with portfolio photos) ============== */
 .services .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .scard{
   position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);
@@ -290,15 +290,54 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
 }
 .scard:hover{transform:translateY(-10px);box-shadow:var(--shadow-hover);border-color:transparent}
 .scard:hover::after{transform:scaleX(1)}
-.scard__num{position:absolute;top:24px;right:24px;font-family:var(--font-display);font-size:2.6rem;color:var(--bg-alt);line-height:1}
-.scard__ico{
-  width:64px;height:64px;border-radius:14px;display:grid;place-items:center;margin-bottom:24px;
-  background:linear-gradient(150deg,var(--red),var(--red-deep));color:#fff;
-}
+.scard__num{position:absolute;top:24px;right:24px;font-family:var(--font-display);font-size:2.6rem;color:var(--bg-alt);line-height:1;z-index:2}
 .scard h3{font-size:1.4rem;margin-bottom:10px}
 .scard p{color:var(--muted);font-size:.96rem}
 .scard__tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .scard__tags li{font-size:.72rem;font-weight:600;letter-spacing:.04em;padding:5px 10px;background:var(--bg-alt);border-radius:999px;color:var(--ink-soft)}
+
+/* Image-based service cards (link wrappers) */
+.scard-link{display:block;text-decoration:none;color:inherit}
+.scard-link .scard{cursor:pointer;height:100%}
+.scard-link .scard__num{
+  background:rgba(0,0,0,.45);color:#fff;padding:4px 12px;border-radius:999px;
+  font-size:1rem;top:16px;right:16px;font-family:var(--font-body);font-weight:700;letter-spacing:.05em;
+}
+.scard__img{
+  width:100%;height:180px;border-radius:12px;overflow:hidden;margin-bottom:20px;
+  position:relative;background:var(--bg-alt);
+}
+.scard__img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease), opacity .3s}
+.scard-link:hover .scard__img img{transform:scale(1.08)}
+
+/* Card image navigation arrows */
+.scard__nav{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+  width:36px;height:36px;border-radius:50%;border:0;
+  background:rgba(0,0,0,.5);color:#fff;font-size:1.4rem;line-height:1;
+  display:grid;place-items:center;cursor:pointer;opacity:0;
+  transition:opacity .3s var(--ease), background .25s, transform .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.scard__nav--prev{left:8px}
+.scard__nav--next{right:8px}
+.scard__img:hover .scard__nav{opacity:1}
+.scard__nav:hover{background:var(--red)}
+.scard__nav:active{transform:translateY(-50%) scale(.9)}
+.scard__counter{
+  position:absolute;bottom:8px;right:8px;z-index:3;
+  background:rgba(0,0,0,.55);color:#fff;font-size:.72rem;font-weight:600;
+  padding:3px 10px;border-radius:999px;pointer-events:none;
+  letter-spacing:.03em;
+}
+/* Touch devices: always show arrows */
+@media (hover:none){ .scard__nav{opacity:.85} }
+
+/* Facilities section uses simple cards (no image, no icon) */
+.facilities .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.facilities .scard{padding:36px 30px}
+.facilities .scard h3{font-size:1.3rem}
+.facilities .scard p{font-size:.95rem}
 
 /* ============== WHY US ============== */
 .why{background:var(--dark);color:#fff;position:relative;overflow:hidden}
