@@ -117,4 +117,20 @@
     }
   }
 
+  /* ---------- Torchlight brand name reveal ---------- */
+  var torchName = document.getElementById('heroTorchName');
+  if(torchName && window.matchMedia('(pointer:fine)').matches){
+    heroSection.addEventListener('mousemove', function(e){
+      var rect = torchName.getBoundingClientRect();
+      var tx = e.clientX - rect.left;
+      var ty = e.clientY - rect.top;
+      torchName.style.setProperty('--tx', tx + 'px');
+      torchName.style.setProperty('--ty', ty + 'px');
+    });
+    heroSection.addEventListener('mouseleave', function(){
+      torchName.style.setProperty('--tx', '-9999px');
+      torchName.style.setProperty('--ty', '-9999px');
+    });
+  }
+
 })();
