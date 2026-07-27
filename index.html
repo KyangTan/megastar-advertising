@@ -103,24 +103,39 @@
 <!-- ====================== ABOUT US ====================== -->
 <section class="section about-content" id="about">
   <div class="wrap">
-    <div class="section-head reveal">
+    <!-- Rotating headline -->
+    <div class="about-content__headline reveal">
       <span class="eyebrow">About Us</span>
-      <h2>The Best Solutions.<br>Fresh Ideas for<br>Your Business.</h2>
+      <div class="about-content__rotator" aria-live="polite">
+        <h2 class="about-content__phrase about-content__phrase--a">
+          The Best <span class="t-red">Solutions.</span>
+        </h2>
+        <h2 class="about-content__phrase about-content__phrase--b">
+          <span class="t-amber">Fresh</span> Ideas for Your Business
+        </h2>
+      </div>
     </div>
 
+    <!-- Editorial split: intro + content blocks -->
     <div class="about-content__grid">
-      <!-- Vision & Mission -->
-      <div class="about-content__block reveal d1">
-        <h3>Our Vision and Mission</h3>
-        <p>Creative and dynamic solutions for businesses. We create inspired, informative, and entertaining content that helps our clients' businesses succeed.</p>
-        <p>We are committed to providing customers with a reliable and responsible one-stop service. Giving the best quality products to customers.</p>
+      <!-- Left: intro -->
+      <div class="about-content__intro reveal d1">
+        <p>Megastar Advertising Signcraft — a signboard manufacturer with 20+ years of experience, providing signage fabrication and installation as a one-stop center in Bukit Mertajam, Pulau Pinang.</p>
       </div>
 
-      <!-- Company Story -->
-      <div class="about-content__block reveal d2">
-        <h3>Our Story</h3>
-        <p>Megastar Advertising Signcraft was established in 1999 with Advertising and Large Format Printing as its core business. We are a signboard manufacturer company with more than 20 years of experience. We've evolved from a humble signage manufacturer to a comprehensive one-stop center by providing signage fabrication and installation to meet our clients' objectives.</p>
-        <p>We are specializing in a wide range of products, including 3D signage, project signboard, billboard, truck sticker, lightbox, acrylic signage, LED signage, and more.</p>
+      <!-- Right: stacked content blocks -->
+      <div class="about-content__blocks">
+        <div class="about-content__block about-content__block--red reveal d2">
+          <h3>Our Vision and Mission</h3>
+          <p>Creative and dynamic solutions for businesses. We create inspired, informative, and entertaining content that helps our clients' businesses succeed.</p>
+          <p>We are committed to providing customers with a reliable and responsible one-stop service. Giving the best quality products to customers.</p>
+        </div>
+
+        <div class="about-content__block about-content__block--amber reveal d3">
+          <h3>Our Story</h3>
+          <p>Megastar Advertising Signcraft was established in 1999 with Advertising and Large Format Printing as its core business. We are a signboard manufacturer company with more than 20 years of experience. We've evolved from a humble signage manufacturer to a comprehensive one-stop center by providing signage fabrication and installation to meet our clients' objectives.</p>
+          <p>We are specializing in a wide range of products, including 3D signage, project signboard, billboard, truck sticker, lightbox, acrylic signage, LED signage, and more.</p>
+        </div>
       </div>
     </div>
   </div>
