@@ -222,6 +222,70 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
   content:"";position:absolute;inset:0;
   background:linear-gradient(105deg, rgba(11,15,26,.92) 0%, rgba(11,15,26,.72) 42%, rgba(11,15,26,.35) 100%);
 }
+
+/* Animated particle canvas */
+.hero__particles{
+  position:absolute;inset:0;width:100%;height:100%;
+  z-index:1;pointer-events:none;
+  mix-blend-mode:screen;
+}
+
+/* Animated gradient mesh — slow-shifting brand color blobs */
+.hero__mesh{
+  position:absolute;inset:-20%;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 40% 50% at 20% 30%, rgba(225,29,42,.12), transparent 60%),
+    radial-gradient(ellipse 35% 40% at 80% 70%, rgba(250,204,21,.08), transparent 60%),
+    radial-gradient(ellipse 50% 35% at 50% 90%, rgba(225,29,42,.06), transparent 60%);
+  animation:meshDrift 22s ease-in-out infinite alternate;
+}
+@keyframes meshDrift{
+  0%  {transform:translate(0,0) rotate(0deg) scale(1)}
+  33% {transform:translate(-3%,2%) rotate(2deg) scale(1.05)}
+  66% {transform:translate(2%,-3%) rotate(-1deg) scale(1.02)}
+  100%{transform:translate(0,0) rotate(0deg) scale(1)}
+}
+
+/* ============== HOLLOW STAR (silver/chrome, cursor-reactive) ============== */
+.hero__star-wrap{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  z-index:-1;pointer-events:none;
+}
+.hero__star--hero{
+  position:relative;width:clamp(220px,40vw,520px);height:auto;aspect-ratio:283/147;
+  opacity:1;pointer-events:none;
+}
+
+/* Base glow layer — silver/chrome metallic outline */
+.hero__star-glow{
+  position:absolute;inset:0;
+  -webkit-mask:url('../img/logo/logo-hollow.png') center/contain no-repeat;
+          mask:url('../img/logo/logo-hollow.png') center/contain no-repeat;
+  background:linear-gradient(
+    135deg,
+    rgba(200,200,210,.70),
+    rgba(255,255,255,.90),
+    rgba(160,160,175,.60),
+    rgba(220,220,230,.75)
+  );
+  filter:drop-shadow(0 0 16px rgba(200,210,225,.50));
+}
+
+/* Cursor shine layer — bright silver reflection that follows cursor */
+.hero__star-shine{
+  position:absolute;inset:0;
+  -webkit-mask:url('../img/logo/logo-hollow.png') center/contain no-repeat;
+          mask:url('../img/logo/logo-hollow.png') center/contain no-repeat;
+  background:radial-gradient(
+    circle 140px at var(--mx,50%) var(--my,50%),
+    rgba(255,255,255,1),
+    rgba(200,210,225,.70),
+    transparent 65%
+  );
+  opacity:0;
+  transition:opacity .4s ease;
+}
+.hero__star.active .hero__star-shine{opacity:1}
 .hero__grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
 .hero__content{color:#fff}
 .hero h1{
@@ -264,6 +328,69 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
 .statrow:first-of-type{border-top:0;padding-top:0}
 .statrow .num{font-family:var(--font-display);font-size:2rem;color:var(--amber);line-height:1}
 .statrow .cap{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+
+/* ============== ABOUT US (Vision & Mission layout) ============== */
+.about-content{background:var(--bg);padding:100px 0}
+.about-content .section-head{text-align:center;margin-bottom:60px}
+.about-content .section-head h2{
+  color:var(--ink);
+  font-size:clamp(2rem,5vw,3.5rem);
+  line-height:1.1;
+}
+.about-content__grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:40px;
+}
+.about-content__block{
+  padding:36px 30px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);
+  transition:transform .4s var(--ease), box-shadow .4s var(--ease);
+}
+.about-content__block:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow-hover);
+}
+.about-content__block::before{
+  content:"";
+  display:block;
+  width:40px;
+  height:4px;
+  background:var(--red);
+  border-radius:2px;
+  margin-bottom:20px;
+}
+.about-content__block h3{
+  font-size:1.3rem;
+  margin-bottom:14px;
+  color:var(--ink);
+}
+.about-content__block p{
+  color:var(--ink-soft);
+  font-size:.98rem;
+  line-height:1.7;
+  margin-bottom:12px;
+}
+.about-content__block p:last-child{margin-bottom:0}
+.about-content__tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  list-style:none;
+  padding:0;
+  margin-top:14px;
+}
+.about-content__tags li{
+  font-size:.78rem;
+  font-weight:600;
+  padding:6px 14px;
+  background:var(--bg-alt);
+  border-radius:999px;
+  color:var(--ink-soft);
+}
 
 /* ============== TRUST STRIP / MARQUEE ============== */
 .ticker{background:var(--dark);color:#fff;overflow:hidden;padding:18px 0;border-top:4px solid var(--red)}
@@ -496,6 +623,7 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
   .hero__bg img{animation:none !important}
   .ticker__track{animation:none !important}
   .fab::before{animation:none !important}
+  .hero__mesh{animation:none !important}
 }
 
 /* ============== RESPONSIVE ============== */
@@ -510,12 +638,15 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
   .hero__grid{grid-template-columns:1fr;gap:40px}
   .hero__card{justify-self:start;max-width:520px}
   .contact .grid{grid-template-columns:1fr}
+  .about-content__grid{grid-template-columns:1fr;gap:24px}
 }
 @media (max-width:640px){
   .services .grid{grid-template-columns:1fr}
   .pgallery{grid-template-columns:repeat(2,1fr);gap:10px}
   .footer__top{grid-template-columns:1fr;gap:30px}
   .stats{grid-template-columns:1fr}
+  .about-content{padding:60px 0}
+  .about-content .section-head{margin-bottom:40px}
   .section-head{margin-bottom:36px}
   .clink{flex-wrap:wrap}
   .clink .arr{display:none}

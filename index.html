@@ -84,29 +84,60 @@
 
 <main id="top">
 
-<!-- ====================== HERO ====================== -->
+<!-- ====================== HERO (hollow star only) ====================== -->
 <section class="hero" id="hero">
   <div class="hero__bg" aria-hidden="true">
     <img src="assets/img/hero/hero-bg.jpg" alt="" />
+    <canvas class="hero__particles" id="heroParticles"></canvas>
+    <div class="hero__mesh"></div>
   </div>
-  <div class="wrap hero__grid">
-    <div class="hero__content">
-      <span class="eyebrow eyebrow--light reveal">Penang · Bukit Mertajam</span>
-      <h1 class="reveal d1">Megastar<br><span class="red">Advertising</span><br><span class="stroke">Signcraft</span></h1>
-      <p class="hero__lead reveal d2">Established in 1999 — Megastar Advertising Signcraft is a signboard manufacturer with 20+ years of experience, providing signage fabrication and installation to meet our clients' objectives.</p>
+  <!-- Hollow shining star (centered, cursor-reactive) -->
+  <div class="hero__star-wrap" aria-hidden="true">
+    <div class="hero__star hero__star--hero" id="heroStar">
+      <div class="hero__star-glow"></div>
+      <div class="hero__star-shine"></div>
+    </div>
+  </div>
+</section>
 
-      <div class="hero__cta reveal d3">
-        <a href="https://wa.me/60167475921?text=Hi%20Megastar%2C%20I'd%20like%20a%20quote" class="btn btn--lg" target="_blank" rel="noopener">WhatsApp Us <span class="arr" aria-hidden="true">→</span></a>
-        <a href="#work" class="btn btn--ghost btn--lg">View Our Work</a>
-      </div>
+<!-- ====================== ABOUT US ====================== -->
+<section class="section about-content" id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">About Us</span>
+      <h2>The Best Solutions.<br>Fresh Ideas for<br>Your Business.</h2>
     </div>
 
-    <aside class="hero__card reveal d3" aria-label="About Megastar Advertising Signcraft">
-      <h3>About Us</h3>
-      <p class="sub">Established 1999 · 20+ years of signage craftsmanship</p>
-      <p>Megastar Advertising Signcraft was established in 1999 with Advertising and Large Format Printing as its core business. We are a signboard manufacturer company with more than 20 years of experience. We've evolved from a humble signage manufacturer to a comprehensive one-stop center — providing signage fabrication and installation to meet our clients' objectives.</p>
-      <p style="margin-top:14px">We specialize in 3D signage, project signboard, billboard, truck sticker, lightbox, acrylic signage, LED signage, and more.</p>
-    </aside>
+    <div class="about-content__grid">
+      <!-- Vision & Mission -->
+      <div class="about-content__block reveal d1">
+        <h3>Our Vision and Mission</h3>
+        <p>Creative and dynamic solutions for businesses. We create inspired, informative, and entertaining content that helps our clients' businesses succeed.</p>
+        <p>We are committed to providing customers with a reliable and responsible one-stop service. Giving the best quality products to customers.</p>
+      </div>
+
+      <!-- Company Story -->
+      <div class="about-content__block reveal d2">
+        <h3>Our Story</h3>
+        <p>Megastar Advertising Signcraft was established in 1999 with Advertising and Large Format Printing as its core business. We are a signboard manufacturer company with more than 20 years of experience. We've evolved from a humble signage manufacturer to a comprehensive one-stop center by providing signage fabrication and installation to meet our clients' objectives.</p>
+      </div>
+
+      <!-- Specializations -->
+      <div class="about-content__block reveal d3">
+        <h3>Our Specializations</h3>
+        <p>We are specializing in a wide range of products, including:</p>
+        <ul class="about-content__tags">
+          <li>3D Signage</li>
+          <li>Project Signboard</li>
+          <li>Billboard</li>
+          <li>Truck Sticker</li>
+          <li>Lightbox</li>
+          <li>Acrylic Signage</li>
+          <li>LED Signage</li>
+          <li>&amp; more</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -232,38 +263,6 @@
         </article>
       </a>
 
-    </div>
-  </div>
-</section>
-
-<!-- ====================== VISION & MISSION ====================== -->
-<section class="section why" id="why">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow eyebrow--light">Our Vision &amp; Mission</span>
-      <h2>Fresh Ideas for<br>Your Business</h2>
-    </div>
-    <div class="why__grid">
-      <div>
-        <div class="feat reveal">
-          <div class="feat__ico">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <div>
-            <h3>Our Vision and Mission</h3>
-            <p>Creative and dynamic solutions for businesses. We create inspired, informative, and engaging content that helps our clients' businesses succeed.</p>
-          </div>
-        </div>
-        <div class="feat reveal d1">
-          <div class="feat__ico">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
-          </div>
-          <div>
-            <h3>Our Commitment</h3>
-            <p>We are committed to providing customers with a reliable and responsible one-stop service. Giving the best quality products to customers.</p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -454,5 +453,6 @@
 </div>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/js/hero-bg.js"></script>
 </body>
 </html>
