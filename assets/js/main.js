@@ -17,6 +17,18 @@
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
 
+  /* ---------- Hide floating WhatsApp FAB over the footer ---------- */
+  var fab = document.querySelector('.fab');
+  var footer = document.querySelector('.footer');
+  if(fab && footer && 'IntersectionObserver' in window){
+    var fo = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        fab.classList.toggle('fab--hidden', en.isIntersecting);
+      });
+    }, {threshold:0});
+    fo.observe(footer);
+  }
+
   /* ---------- Mobile menu ---------- */
   var burger = document.getElementById('burger');
   var overlay = document.getElementById('overlay');
@@ -173,6 +185,15 @@
   var isGalleryPage = window.location.pathname.indexOf('gallery') > -1 || document.querySelector('.gallery-hero');
   var PORTFOLIO_DATA = null;
   var activeFilter = 'all';
+  // Optional ?cat= deep-link to a pre-selected filter (gallery page)
+  (function(){
+    try {
+      var cat = new URLSearchParams(window.location.search).get('cat');
+      if(cat && document.querySelector('.filter[data-filter="' + cat + '"]')){
+        activeFilter = cat;
+      }
+    } catch(e){}
+  })();
   var visibleCount = 0;
   var PAGE_SIZE = isGalleryPage ? 24 : 18;
   var lightboxIndex = 0;
@@ -449,6 +470,11 @@
           PORTFOLIO_DATA.items = curated;
         }
 
+        if(activeFilter !== 'all'){
+          document.querySelectorAll('.filter').forEach(function(b){
+            b.classList.toggle('active', b.getAttribute('data-filter') === activeFilter);
+          });
+        }
         visibleCount = PAGE_SIZE;
         renderGallery();
 

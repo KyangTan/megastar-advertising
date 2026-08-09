@@ -54,16 +54,10 @@
     <nav class="nav__links" aria-label="Primary">
       <a href="#services">Services</a>
       <a href="#facilities">Facilities</a>
-      <span class="nav__dropdown">
-        <a href="#work" class="nav__dropdown-toggle">Work <span class="nav__caret" aria-hidden="true">▾</span></a>
-        <span class="nav__dropdown-menu">
-          <a href="#work">Featured Work</a>
-          <a href="gallery.html">Full Gallery</a>
-        </span>
-      </span>
+      <a href="gallery.html">Gallery</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a href="https://wa.me/60167475921?text=Hi%20Megastar%2C%20I'd%20like%20a%20quote" class="btn" target="_blank" rel="noopener">
+    <a href="https://wa.me/60164345921?text=Hi%20Megastar%2C%20I'd%20like%20a%20quote" class="btn" target="_blank" rel="noopener">
       Get a Quote <span aria-hidden="true">⚡</span>
     </a>
     <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
@@ -76,29 +70,27 @@
 <div class="overlay" id="overlay" aria-hidden="true">
   <a href="#services">Services</a>
   <a href="#facilities">Facilities</a>
-  <a href="#work">Featured Work</a>
-  <a href="gallery.html">Full Gallery</a>
+  <a href="gallery.html">Gallery</a>
   <a href="#contact">Contact</a>
-  <a href="https://wa.me/60167475921?text=Hi%20Megastar%2C%20I'd%20like%20a%20quote" target="_blank" rel="noopener">Get a Quote ⚡</a>
+  <a href="https://wa.me/60164345921?text=Hi%20Megastar%2C%20I'd%20like%20a%20quote" target="_blank" rel="noopener">Get a Quote ⚡</a>
 </div>
 
 <main id="top">
 
-<!-- ====================== HERO (hollow star only) ====================== -->
+<!-- ====================== HERO (sliding photo bg + logo) ====================== -->
 <section class="hero" id="hero">
   <div class="hero__bg" aria-hidden="true">
-    <img src="assets/img/hero/hero-bg.jpg" alt="" />
-    <canvas class="hero__particles" id="heroParticles"></canvas>
-    <div class="hero__mesh"></div>
-  </div>
-  <!-- Hollow shining star (centered, cursor-reactive) -->
-  <div class="hero__star-wrap" aria-hidden="true">
-    <div class="hero__star hero__star--hero" id="heroStar">
-      <div class="hero__star-glow"></div>
-      <div class="hero__star-shine"></div>
+    <div class="hero__slides" id="heroSlides">
+      <div class="hero__slide active" style="background-image:url('assets/img/hero_background_slides/Billbord.jpeg')"></div>
+      <div class="hero__slide" style="background-image:url('assets/img/hero_background_slides/Dobi Sekeluarga.jpeg')"></div>
+      <div class="hero__slide" style="background-image:url('assets/img/hero_background_slides/Paint Point.jpeg')"></div>
+      <div class="hero__slide" style="background-image:url('assets/img/hero_background_slides/Palmington.jpeg')"></div>
+      <div class="hero__slide" style="background-image:url('assets/img/hero_background_slides/Woodblind.jpeg')"></div>
     </div>
-    <!-- Torchlight brand name — revealed by cursor proximity -->
-    <p class="hero__torchname" id="heroTorchName">Megastar Advertising Signcraft</p>
+  </div>
+  <!-- Centered brand logo with subtle opacity -->
+  <div class="hero__star-wrap" aria-hidden="true">
+    <img class="hero__logo" id="heroLogo" src="assets/img/logo/Latest-logo.png" alt="Megastar Advertising Signcraft" />
   </div>
 </section>
 
@@ -118,48 +110,35 @@
       </div>
     </div>
 
-    <!-- Editorial split: intro + content blocks -->
-    <div class="about-content__grid">
-      <!-- Left: hollow star + floating client banners -->
-      <div class="about-content__visual reveal d1">
-        <div class="about-content__star">
-          <div class="about-content__star-glow"></div>
-        </div>
-        <!-- Floating client banners orbiting the star -->
-        <div class="about-content__orbit about-content__orbit--1">
-          <img src="assets/img/client_banner/client-01.png" alt="" loading="lazy" />
-        </div>
-        <div class="about-content__orbit about-content__orbit--2">
-          <img src="assets/img/client_banner/client-03.png" alt="" loading="lazy" />
-        </div>
-        <div class="about-content__orbit about-content__orbit--3">
-          <img src="assets/img/client_banner/client-05.png" alt="" loading="lazy" />
-        </div>
-        <div class="about-content__orbit about-content__orbit--4">
-          <img src="assets/img/client_banner/client-07.png" alt="" loading="lazy" />
-        </div>
-        <div class="about-content__orbit about-content__orbit--5">
-          <img src="assets/img/client_banner/client-09.png" alt="" loading="lazy" />
-        </div>
-        <div class="about-content__orbit about-content__orbit--6">
-          <img src="assets/img/client_banner/client-11.png" alt="" loading="lazy" />
-        </div>
+    <!-- Content blocks -->
+    <div class="about-content__blocks about-content__blocks--grid">
+      <div class="about-content__block about-content__block--red reveal d1">
+        <h3>Our Vision and Mission</h3>
+        <p>Creative and dynamic solutions for businesses. We create inspired, informative, and entertaining content that helps our clients' businesses succeed.</p>
+        <p>We are committed to providing customers with a reliable and responsible one-stop service. Giving the best quality products to customers.</p>
       </div>
 
-      <!-- Right: stacked content blocks -->
-      <div class="about-content__blocks">
-        <div class="about-content__block about-content__block--red reveal d2">
-          <h3>Our Vision and Mission</h3>
-          <p>Creative and dynamic solutions for businesses. We create inspired, informative, and entertaining content that helps our clients' businesses succeed.</p>
-          <p>We are committed to providing customers with a reliable and responsible one-stop service. Giving the best quality products to customers.</p>
-        </div>
-
-        <div class="about-content__block about-content__block--amber reveal d3">
-          <h3>Our Story</h3>
-          <p>Megastar Advertising Signcraft was established in 1999 with Advertising and Large Format Printing as its core business. We are a signboard manufacturer company with more than 20 years of experience. We've evolved from a humble signage manufacturer to a comprehensive one-stop center by providing signage fabrication and installation to meet our clients' objectives.</p>
-          <p>We are specializing in a wide range of products, including 3D signage, project signboard, billboard, truck sticker, lightbox, acrylic signage, LED signage, and more.</p>
-        </div>
+      <div class="about-content__block about-content__block--amber reveal d2">
+        <h3>Our Story</h3>
+        <p>Megastar Advertising Signcraft was established in 1999 with Advertising and Large Format Printing as its core business. We are a signboard manufacturer company with more than 20 years of experience. We've evolved from a humble signage manufacturer to a comprehensive one-stop center by providing signage fabrication and installation to meet our clients' objectives.</p>
+        <p>We are specializing in a wide range of products, including 3D signage, project signboard, billboard, truck sticker, lightbox, acrylic signage, LED signage, and more.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== CLIENTELE (interactive force network) ====================== -->
+<section class="section clientele" id="clientele">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Our Clientele</span>
+      <h2>Trusted by leading brands</h2>
+    </div>
+    <div class="clientele__stage reveal d1">
+      <div class="clientele__network" id="clienteleNetwork"></div>
+      <button class="clientele__reset" id="clienteleReset" aria-label="Reset client network" title="Reset network">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+      </button>
     </div>
   </div>
 </section>
@@ -174,7 +153,7 @@
     </div>
     <div class="grid">
 
-      <a href="gallery.html" class="scard-link reveal" data-images='["assets/img/thumb/3d-signage-2022-09-05_amlex_01.jpg","assets/img/thumb/3d-signage-2022-09-05_amlex_02.jpg","assets/img/thumb/3d-signage-2022-09-05_amlex_03.jpg","assets/img/thumb/3d-signage-2023-04-25_fong_seng_hardware_01.jpg","assets/img/thumb/3d-signage-2023-05-05_bomba_taman_sukun_01.jpg","assets/img/thumb/3d-signage-2023-05-08_bomba_taman_sukun.jpg"]'>
+      <a href="gallery.html?cat=3d-signage" class="scard-link reveal" data-images='["assets/img/thumb/3d-signage-2022-09-05_amlex_01.jpg","assets/img/thumb/3d-signage-2022-09-05_amlex_02.jpg","assets/img/thumb/3d-signage-2022-09-05_amlex_03.jpg","assets/img/thumb/3d-signage-2023-04-25_fong_seng_hardware_01.jpg","assets/img/thumb/3d-signage-2023-05-05_bomba_taman_sukun_01.jpg","assets/img/thumb/3d-signage-2023-05-08_bomba_taman_sukun.jpg"]'>
         <article class="scard">
           <span class="scard__num" aria-hidden="true">01</span>
           <div class="scard__img">
@@ -188,7 +167,7 @@
         </article>
       </a>
 
-      <a href="gallery.html" class="scard-link reveal d1" data-images='["assets/img/thumb/3d-led-2022-12-12_amlex_3d_led_signage_13.jpg","assets/img/thumb/3d-led-2022-12-12_amlex_3d_led_signage_7.jpg","assets/img/thumb/3d-led_8168ef6ee6.jpg","assets/img/thumb/3d-led_15b7b1512d.jpg","assets/img/thumb/3d-led_d1aa89c638.jpg","assets/img/thumb/3d-led_7dc565a191.jpg"]'>
+      <a href="gallery.html?cat=3d-led" class="scard-link reveal d1" data-images='["assets/img/thumb/3d-led-2022-12-12_amlex_3d_led_signage_13.jpg","assets/img/thumb/3d-led-2022-12-12_amlex_3d_led_signage_7.jpg","assets/img/thumb/3d-led_8168ef6ee6.jpg","assets/img/thumb/3d-led_15b7b1512d.jpg","assets/img/thumb/3d-led_d1aa89c638.jpg","assets/img/thumb/3d-led_7dc565a191.jpg"]'>
         <article class="scard">
           <span class="scard__num" aria-hidden="true">02</span>
           <div class="scard__img">
@@ -202,7 +181,7 @@
         </article>
       </a>
 
-      <a href="gallery.html" class="scard-link reveal d2" data-images='["assets/img/thumb/banner_7394dccb88.jpg","assets/img/thumb/banner_5f3759fe6c.jpg","assets/img/thumb/banner_0e10ecde46.jpg","assets/img/thumb/banner_d6a1f50124.jpg","assets/img/thumb/banner_a8d2477fbb.jpg","assets/img/thumb/banner_a57c51354b.jpg"]'>
+      <a href="gallery.html?cat=banner" class="scard-link reveal d2" data-images='["assets/img/thumb/banner_7394dccb88.jpg","assets/img/thumb/banner_5f3759fe6c.jpg","assets/img/thumb/banner_0e10ecde46.jpg","assets/img/thumb/banner_d6a1f50124.jpg","assets/img/thumb/banner_a8d2477fbb.jpg","assets/img/thumb/banner_a57c51354b.jpg"]'>
         <article class="scard">
           <span class="scard__num" aria-hidden="true">03</span>
           <div class="scard__img">
@@ -216,7 +195,7 @@
         </article>
       </a>
 
-      <a href="gallery.html" class="scard-link reveal d3" data-images='["assets/img/thumb/billboard_52121d9eb6.jpg","assets/img/thumb/billboard_705d6675df.jpg","assets/img/thumb/billboard_0bc412c97f.jpg","assets/img/thumb/billboard-2023-11-20_np-heng_wei_billboard_1.jpg","assets/img/thumb/billboard-2023-11-20_palmington_billboard_after.jpg","assets/img/thumb/billboard-2023-11-20_pearl_city_billboard_after.jpg"]'>
+      <a href="gallery.html?cat=billboard" class="scard-link reveal d3" data-images='["assets/img/thumb/billboard_52121d9eb6.jpg","assets/img/thumb/billboard_705d6675df.jpg","assets/img/thumb/billboard_0bc412c97f.jpg","assets/img/thumb/billboard-2023-11-20_np-heng_wei_billboard_1.jpg","assets/img/thumb/billboard-2023-11-20_palmington_billboard_after.jpg","assets/img/thumb/billboard-2023-11-20_pearl_city_billboard_after.jpg"]'>
         <article class="scard">
           <span class="scard__num" aria-hidden="true">04</span>
           <div class="scard__img">
@@ -230,7 +209,7 @@
         </article>
       </a>
 
-      <a href="gallery.html" class="scard-link reveal" data-images='["assets/img/thumb/metalboard_4633788b43.jpg","assets/img/thumb/metalboard-2023-06-28_horizon_metalboard.jpg","assets/img/thumb/metalboard-2023-07-14_np_power_strength_metalboard_after.jpg","assets/img/thumb/metalboard-2023-08-10_rock_oil_mickey_motor_metalboard_2.jpg","assets/img/thumb/metalboard-2023-09-13_sancora_-_amin_after.jpg","assets/img/thumb/metalboard-2013-06-04_sunrider_01.jpg"]'>
+      <a href="gallery.html?cat=metalboard" class="scard-link reveal" data-images='["assets/img/thumb/metalboard_4633788b43.jpg","assets/img/thumb/metalboard-2023-06-28_horizon_metalboard.jpg","assets/img/thumb/metalboard-2023-07-14_np_power_strength_metalboard_after.jpg","assets/img/thumb/metalboard-2023-08-10_rock_oil_mickey_motor_metalboard_2.jpg","assets/img/thumb/metalboard-2023-09-13_sancora_-_amin_after.jpg","assets/img/thumb/metalboard-2013-06-04_sunrider_01.jpg"]'>
         <article class="scard">
           <span class="scard__num" aria-hidden="true">05</span>
           <div class="scard__img">
@@ -244,7 +223,7 @@
         </article>
       </a>
 
-      <a href="gallery.html" class="scard-link reveal d1" data-images='["assets/img/thumb/vehicle_3daa0682ce.jpg","assets/img/thumb/vehicle_10f9fce429.jpg","assets/img/thumb/vehicle_334ebcd131.jpg","assets/img/thumb/vehicle-boh_tea_2.jpg","assets/img/thumb/vehicle-boh_tea.jpg","assets/img/thumb/vehicle-img-20230620-wa0016.jpg"]'>
+      <a href="gallery.html?cat=vehicle" class="scard-link reveal d1" data-images='["assets/img/thumb/vehicle_3daa0682ce.jpg","assets/img/thumb/vehicle_10f9fce429.jpg","assets/img/thumb/vehicle_334ebcd131.jpg","assets/img/thumb/vehicle-boh_tea_2.jpg","assets/img/thumb/vehicle-boh_tea.jpg","assets/img/thumb/vehicle-img-20230620-wa0016.jpg"]'>
         <article class="scard">
           <span class="scard__num" aria-hidden="true">06</span>
           <div class="scard__img">
@@ -258,7 +237,7 @@
         </article>
       </a>
 
-      <a href="gallery.html" class="scard-link reveal d2" data-images='["assets/img/thumb/wallpaper_af0e80a0e5.jpg","assets/img/thumb/wallpaper-coko_wallpaper.jpg","assets/img/thumb/wallpaper-img-20220830-wa0008.jpg","assets/img/thumb/wallpaper-img-20221017-wa0002.jpg","assets/img/thumb/wallpaper-img-20221104-wa0005.jpg","assets/img/thumb/wallpaper-img-20230116-wa0023.jpg"]'>
+      <a href="gallery.html?cat=wallpaper" class="scard-link reveal d2" data-images='["assets/img/thumb/wallpaper_af0e80a0e5.jpg","assets/img/thumb/wallpaper-coko_wallpaper.jpg","assets/img/thumb/wallpaper-img-20220830-wa0008.jpg","assets/img/thumb/wallpaper-img-20221017-wa0002.jpg","assets/img/thumb/wallpaper-img-20221104-wa0005.jpg","assets/img/thumb/wallpaper-img-20230116-wa0023.jpg"]'>
         <article class="scard">
           <span class="scard__num" aria-hidden="true">07</span>
           <div class="scard__img">
@@ -272,7 +251,7 @@
         </article>
       </a>
 
-      <a href="gallery.html" class="scard-link reveal d3" data-images='["assets/img/thumb/sandblast-img-20220816-wa0027.jpg","assets/img/thumb/sandblast-img-20220816-wa0028.jpg","assets/img/thumb/sandblast-img-20220816-wa0029.jpg","assets/img/thumb/sandblast-img-20220816-wa0030.jpg","assets/img/thumb/sandblast-img-20220816-wa0031.jpg","assets/img/thumb/sandblast-img-20220816-wa0032.jpg"]'>
+      <a href="gallery.html?cat=sandblast" class="scard-link reveal d3" data-images='["assets/img/thumb/sandblast-img-20220816-wa0027.jpg","assets/img/thumb/sandblast-img-20220816-wa0028.jpg","assets/img/thumb/sandblast-img-20220816-wa0029.jpg","assets/img/thumb/sandblast-img-20220816-wa0030.jpg","assets/img/thumb/sandblast-img-20220816-wa0031.jpg","assets/img/thumb/sandblast-img-20220816-wa0032.jpg"]'>
         <article class="scard">
           <span class="scard__num" aria-hidden="true">08</span>
           <div class="scard__img">
@@ -301,55 +280,46 @@
 
       <article class="scard reveal">
         <span class="scard__num" aria-hidden="true">01</span>
+        <div class="scard__img"><img src="assets/img/infrastructure/UV LED Printer.jpg" alt="UV LED Printer" loading="lazy" /></div>
         <h3>UV LED Printer</h3>
         <p>Used for printing visuals. Uses ultraviolet lights to dry or cure ink on stickers, wallpaper, canvas, etc.</p>
       </article>
 
       <article class="scard reveal d1">
         <span class="scard__num" aria-hidden="true">02</span>
+        <div class="scard__img"><img src="assets/img/infrastructure/Router Cutting.jpg" alt="Router Cutting" loading="lazy" /></div>
         <h3>Router Cutting</h3>
         <p>Used for cutting and engraving materials such as acrylic sheets, wood, and compressed board. Creates different bevel edges.</p>
       </article>
 
       <article class="scard reveal d2">
         <span class="scard__num" aria-hidden="true">03</span>
+        <div class="scard__img"><img src="assets/img/infrastructure/Letter Bender.jpg" alt="Letter Bending" loading="lazy" /></div>
         <h3>Letter Bending</h3>
         <p>An automatic channel letter bending machine for sign-making.</p>
       </article>
 
       <article class="scard reveal d3">
         <span class="scard__num" aria-hidden="true">04</span>
+        <div class="scard__img"><img src="assets/img/infrastructure/Plotter Machine.png" alt="Plotter" loading="lazy" /></div>
         <h3>Plotter</h3>
         <p>Used for plotting out fitting jobs or cutting out stickers.</p>
       </article>
 
       <article class="scard reveal">
         <span class="scard__num" aria-hidden="true">05</span>
+        <div class="scard__img"><img src="assets/img/infrastructure/Laminator.jpg" alt="Laminator" loading="lazy" /></div>
         <h3>Laminator</h3>
         <p>Used for sealing stickers or posters with a protective layer, usually made of plastic film, on either side of the item.</p>
       </article>
 
       <article class="scard reveal d1">
         <span class="scard__num" aria-hidden="true">06</span>
+        <div class="scard__img"><img src="assets/img/infrastructure/Cargo Truck.jpg" alt="Cargo Truck" loading="lazy" /></div>
         <h3>Cargo Truck</h3>
         <p>Cargo trucks used to load large signages or goods.</p>
       </article>
 
-    </div>
-  </div>
-</section>
-
-<!-- ====================== PORTFOLIO ====================== -->
-<section class="section work" id="work">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">Recent work</span>
-      <h2>Signs that get<br>noticed.</h2>
-      <p>A selection of our 678+ projects. View the full gallery for more.</p>
-    </div>
-
-    <div class="load-more-wrap reveal">
-      <a href="gallery.html" class="btn btn--dark btn--lg">View Full Gallery (678 Projects) <span class="arr" aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
@@ -361,29 +331,29 @@
       <div class="contact-card reveal">
         <span class="eyebrow">Get in touch</span>
         <h2>Let's build<br>your sign.</h2>
-        <p class="lead">Call, WhatsApp or email — tell us what you need and we'll quote fast. Visit the workshop in Juru.</p>
+        <p class="lead">Call, WhatsApp or email — tell us what you need and we'll quote fast. Visit us in Bukit Mertajam.</p>
 
-        <a class="clink" href="tel:+6045079098">
+        <a class="clink" href="tel:+60124335921">
           <span class="ico" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
           </span>
-          <span class="clink-row"><span class="label">Call us</span><span class="value">04-507 9098</span></span>
+          <span class="clink-row"><span class="label">Call us</span><span class="value">+6012-433 5921</span></span>
           <span class="arr" aria-hidden="true">↗</span>
         </a>
 
-        <a class="clink amber" href="https://wa.me/60167475921?text=Hi%20Megastar%2C%20I'd%20like%20a%20quote" target="_blank" rel="noopener">
+        <a class="clink amber" href="https://wa.me/60164345921?text=Hi%20Megastar%2C%20I'd%20like%20a%20quote" target="_blank" rel="noopener">
           <span class="ico" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 2a8 8 0 1 1-4.2 14.8l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 0 1 12 4zm-2.7 4.2c-.2 0-.5.1-.7.3-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.9 4.5 3.9 2.2.9 2.7.7 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.7.9c-.1.2-.3.2-.5.1-.7-.3-1.4-.6-2.1-1.4-.5-.5-.9-1.1-1-1.3-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4 0-.1 0-.3 0-.4l-.7-1.7c-.2-.4-.4-.4-.5-.4z"/></svg>
           </span>
-          <span class="clink-row"><span class="label">WhatsApp</span><span class="value">+60 16-747 5921</span></span>
+          <span class="clink-row"><span class="label">WhatsApp</span><span class="value">+60 16-434 5921</span></span>
           <span class="arr" aria-hidden="true">↗</span>
         </a>
 
-        <a class="clink dark" href="mailto:info@megastarads.com?subject=Enquiry%20from%20megastarads.com">
+        <a class="clink dark" href="mailto:megastarsales1@gmail.com?subject=Enquiry%20from%20megastarads.com">
           <span class="ico" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
           </span>
-          <span class="clink-row"><span class="label">Email</span><span class="value">info@megastarads.com</span></span>
+          <span class="clink-row"><span class="label">Email</span><span class="value">megastarsales1@gmail.com</span></span>
           <span class="arr" aria-hidden="true">↗</span>
         </a>
 
@@ -391,20 +361,20 @@
           <span class="ico" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg>
           </span>
-          <span class="clink-row"><span class="label">Workshop</span><span class="value">No. 815, Jalan Tok Kangar, Kawasan Perusahaan Ringan Juru, Juru, Bukit Mertajam, Pulau Pinang</span></span>
+          <span class="clink-row"><span class="label">Workshop</span><span class="value">No. 1895 &amp; 1896, 1st floor, Jalan Pulasan, Taman Sri Mangga, 14000 Bukit Mertajam, Pulau Pinang</span></span>
         </div>
 
-        <a href="https://wa.me/60167475921?text=Hi%20Megastar%2C%20I'd%20like%20a%20quote" class="btn btn--lg" target="_blank" rel="noopener" style="width:100%;margin-top:10px">Request a quote <span class="arr" aria-hidden="true">→</span></a>
+        <a href="https://wa.me/60164345921?text=Hi%20Megastar%2C%20I'd%20like%20a%20quote" class="btn btn--lg" target="_blank" rel="noopener" style="width:100%;margin-top:10px">Request a quote <span class="arr" aria-hidden="true">→</span></a>
       </div>
 
       <div class="mapwrap reveal d1">
         <iframe
-          title="Megastar Advertising Signcraft workshop location, Juru, Bukit Mertajam"
-          src="https://www.google.com/maps?q=Kawasan+Perusahaan+Ringan+Juru+Bukit+Mertajam+Pulau+Pinang&output=embed"
+          title="Megastar Advertising Signcraft location, Taman Sri Mangga, Bukit Mertajam"
+          src="https://www.google.com/maps?q=Taman+Sri+Mangga+Bukit+Mertajam+Pulau+Pinang&output=embed"
           loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
         <div class="mapbadge">
-          <div class="b1">Megastar Workshop</div>
-          <div class="b2">Juru Light Industrial Area, Bukit Mertajam</div>
+          <div class="b1">Megastar Advertising Signcraft</div>
+          <div class="b2">Taman Sri Mangga, Bukit Mertajam</div>
         </div>
       </div>
     </div>
@@ -425,7 +395,7 @@
         <ul>
           <li><a href="#services">Services</a></li>
           <li><a href="#facilities">Facilities</a></li>
-          <li><a href="#work">Work</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
           <li><a href="gallery.html">Full Gallery</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -435,7 +405,6 @@
         <ul>
           <li>MR SAM (<a href="tel:+60124335921">+6012-433 5921</a>)</li>
           <li>SALES (<a href="tel:+60164345921">+6016-434 5921</a>)</li>
-          <li>OFFICE (<a href="tel:+60167475921">+6016-747 5921</a>)</li>
           <li><a href="mailto:megastarsales1@gmail.com">megastarsales1@gmail.com</a></li>
           <li>No. 1895 &amp; 1896, 1st floor, Jalan Pulasan, Taman Sri Mangga, 14000 Bukit Mertajam, Pulau Pinang</li>
         </ul>
@@ -444,10 +413,16 @@
     <div class="footer__bottom">
       <span>© 2026 Megastar Advertising Signcraft. All rights reserved.</span>
       <div class="footer__socials">
-        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Megastar on Facebook">
+        <a href="https://www.facebook.com/profile.php?id=61550722712257" target="_blank" rel="noopener" aria-label="Megastar on Facebook">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3l.5-3H14V4.5c0-.9.3-1.5 1.6-1.5H17V.2C16.6.1 15.6 0 14.5 0 12 0 10.3 1.5 10.3 4.2V6H7.5v3h2.8v9H14z"/></svg>
         </a>
-        <a href="https://wa.me/60167475921" target="_blank" rel="noopener" aria-label="WhatsApp Megastar">
+        <a href="https://xhslink.com/m/4BC1K9GZU2t" target="_blank" rel="noopener" aria-label="Megastar on Xiaohongshu (小红书)">
+          <img src="assets/img/social/rednote.png" alt="Xiaohongshu" width="18" height="18" />
+        </a>
+        <a href="https://www.tiktok.com/@megastar.printing" target="_blank" rel="noopener" aria-label="Megastar on TikTok">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        </a>
+        <a href="https://wa.me/60164345921" target="_blank" rel="noopener" aria-label="WhatsApp Megastar">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 2a8 8 0 1 1-4.2 14.8l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 0 1 12 4z"/></svg>
         </a>
       </div>
@@ -456,7 +431,7 @@
 </footer>
 
 <!-- ====================== FLOATING WHATSAPP ====================== -->
-<a href="https://wa.me/60167475921?text=Hi%20Megastar%2C%20I'd%20like%20a%20quote" class="fab" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+<a href="https://wa.me/60164345921?text=Hi%20Megastar%2C%20I'd%20like%20a%20quote" class="fab" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 2a8 8 0 1 1-4.2 14.8l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 0 1 12 4zm-2.7 4.2c-.2 0-.5.1-.7.3-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.9 4.5 3.9 2.2.9 2.7.7 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.7.9c-.1.2-.3.2-.5.1-.7-.3-1.4-.6-2.1-1.4-.5-.5-.9-1.1-1-1.3-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4 0-.1 0-.3 0-.4l-.7-1.7c-.2-.4-.4-.4-.5-.4z"/></svg>
 </a>
 
@@ -477,5 +452,7 @@
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/hero-bg.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="assets/js/clientele.js"></script>
 </body>
 </html>

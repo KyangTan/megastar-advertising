@@ -80,17 +80,17 @@ button{font-family:inherit;cursor:pointer}
 .nav__inner{display:flex;align-items:center;justify-content:space-between;gap:18px}
 .nav__logo{display:flex;align-items:center;gap:10px;text-decoration:none;position:relative}
 .nav__logo img{
-  height:32px;width:auto;
+  height:56px;width:auto;
   transition:opacity .4s var(--ease);
 }
 /* Stacked logo crossfade: white (hero) → dark ink (scrolled) */
 .nav__logo .logo-light{
   position:absolute;left:0;top:50%;transform:translateY(-50%);
-  height:32px;width:auto;opacity:1;
+  height:56px;width:auto;opacity:1;
   transition:opacity .4s var(--ease);
 }
 .nav__logo .logo-dark{
-  height:32px;width:auto;opacity:0;
+  height:56px;width:auto;opacity:0;
   transition:opacity .4s var(--ease);
 }
 .nav.scrolled .nav__logo .logo-light{opacity:0}
@@ -211,16 +211,20 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
 
 /* ============== HERO ============== */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:140px 0 90px;overflow:hidden}
-.hero__bg{position:absolute;inset:0;z-index:-2;overflow:hidden}
-.hero__bg img{
-  width:100%;height:120%;object-fit:cover;object-position:center;
-  transform:scale(1.08);animation:kenburns 18s ease-in-out infinite alternate;
-  filter:grayscale(35%) contrast(1.05);
+.hero__bg{position:absolute;inset:0;z-index:-2;overflow:hidden;background:var(--dark)}
+.hero__slides{position:absolute;inset:0}
+.hero__slide{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  opacity:0;transform:translateX(100%);
+  transition:transform 1s var(--ease), opacity 1s var(--ease);
+  will-change:transform,opacity;
 }
-@keyframes kenburns{from{transform:scale(1.05) translateY(-1.5%)}to{transform:scale(1.18) translateY(1.5%)}}
+.hero__slide.active{opacity:1;transform:translateX(0)}
+.hero__slide.exit{opacity:0;transform:translateX(-100%)}
 .hero__bg::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(105deg, rgba(11,15,26,.92) 0%, rgba(11,15,26,.72) 42%, rgba(11,15,26,.35) 100%);
+  content:"";position:absolute;inset:0;z-index:2;
+  background:linear-gradient(105deg, rgba(11,15,26,.72) 0%, rgba(11,15,26,.45) 45%, rgba(11,15,26,.20) 100%);
 }
 
 /* Animated particle canvas */
@@ -246,47 +250,20 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
   100%{transform:translate(0,0) rotate(0deg) scale(1)}
 }
 
-/* ============== HOLLOW STAR (silver/chrome, cursor-reactive) ============== */
+/* ============== HERO LOGO (centered, subtle opacity) ============== */
 .hero__star-wrap{
   position:absolute;inset:0;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:24px;
-  z-index:-1;pointer-events:none;
+  align-items:center;justify-content:center;gap:22px;
+  z-index:1;pointer-events:none;
 }
-.hero__star--hero{
-  position:relative;width:clamp(220px,40vw,520px);height:auto;aspect-ratio:283/147;
-  opacity:1;pointer-events:none;
+.hero__logo{
+  flex:none;
+  height:clamp(192px,38vh,360px);width:auto;max-width:85vw;
+  opacity:.55;
+  filter:drop-shadow(0 6px 26px rgba(0,0,0,.45));
+  animation:heroLogoFloat 7s ease-in-out infinite;
 }
-
-/* Base glow layer — silver/chrome metallic outline */
-.hero__star-glow{
-  position:absolute;inset:0;
-  -webkit-mask:url('../img/logo/logo-hollow.png') center/contain no-repeat;
-          mask:url('../img/logo/logo-hollow.png') center/contain no-repeat;
-  background:linear-gradient(
-    135deg,
-    rgba(200,200,210,.70),
-    rgba(255,255,255,.90),
-    rgba(160,160,175,.60),
-    rgba(220,220,230,.75)
-  );
-  filter:drop-shadow(0 0 16px rgba(200,210,225,.50));
-}
-
-/* Cursor shine layer — bright silver reflection that follows cursor */
-.hero__star-shine{
-  position:absolute;inset:0;
-  -webkit-mask:url('../img/logo/logo-hollow.png') center/contain no-repeat;
-          mask:url('../img/logo/logo-hollow.png') center/contain no-repeat;
-  background:radial-gradient(
-    circle 140px at var(--mx,50%) var(--my,50%),
-    rgba(255,255,255,1),
-    rgba(200,210,225,.70),
-    transparent 65%
-  );
-  opacity:0;
-  transition:opacity .4s ease;
-}
-.hero__star.active .hero__star-shine{opacity:1}
+@keyframes heroLogoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
 /* Torchlight brand name — transparent text revealed by cursor */
 .hero__torchname{
@@ -462,6 +439,9 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
 /* Right: stacked blocks */
 .about-content__blocks{
   display:flex;flex-direction:column;gap:28px;
+}
+.about-content__blocks--grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch;
 }
 
 /* Content blocks with colored accent rails */
@@ -675,8 +655,9 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
 .fab{
   position:fixed;right:22px;bottom:22px;z-index:55;width:62px;height:62px;border-radius:50%;
   background:#25D366;display:grid;place-items:center;box-shadow:0 14px 34px -10px rgba(37,211,102,.7);
-  transition:transform .3s var(--ease);
+  transition:transform .3s var(--ease), opacity .3s var(--ease), visibility .3s var(--ease);
 }
+.fab--hidden{opacity:0;visibility:hidden;transform:scale(.6);pointer-events:none}
 .fab::before{
   content:"";position:absolute;inset:0;border-radius:50%;background:#25D366;z-index:-1;
   animation:pulse 2.4s ease-out infinite;
@@ -806,3 +787,55 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
   pointer-events:none;opacity:0;transition:opacity .3s;
 }
 .filters-sticky.scrollable::after{opacity:1}
+
+/* ============== CLIENTELE (d3 force network) ============== */
+.clientele{background:var(--bg-alt)}
+.clientele .section-head{text-align:center;margin-left:auto;margin-right:auto}
+.clientele__stage{
+  position:relative;width:100%;
+  height:min(580px,72vh);min-height:440px;
+  border-radius:var(--radius-lg);
+  background:radial-gradient(circle at 50% 42%, #ffffff 0%, var(--bg-alt) 78%);
+  border:1px solid var(--line);overflow:hidden;
+  box-shadow:var(--shadow-card);
+}
+.clientele__network{position:absolute;inset:0}
+.clientele__reset{
+  position:absolute;top:14px;right:14px;z-index:6;
+  width:40px;height:40px;border-radius:50%;
+  background:#fff;border:1px solid var(--line);color:var(--ink-soft);
+  display:grid;place-items:center;cursor:pointer;
+  box-shadow:var(--shadow-card);
+  transition:transform .3s var(--ease), color .25s, border-color .25s;
+}
+.clientele__reset:hover{color:var(--red);border-color:var(--red);transform:rotate(-90deg)}
+.clientele__hint{
+  position:absolute;left:16px;bottom:14px;z-index:6;
+  font-size:.74rem;letter-spacing:.04em;color:var(--muted);
+  background:rgba(255,255,255,.7);backdrop-filter:blur(4px);
+  padding:6px 12px;border-radius:999px;border:1px solid var(--line);
+  pointer-events:none;
+}
+.cn-links line{stroke:rgba(15,23,42,.14);stroke-width:1.5;transition:stroke .25s, stroke-width .25s, opacity .25s}
+.cn-links line.hl{stroke:var(--red);stroke-width:2.5}
+.cn-links line.dim{opacity:.12}
+.cn-node{cursor:grab;transition:opacity .25s}
+.cn-node.dim{opacity:.22}
+.cn-node.dragging{cursor:grabbing}
+.cn-logo{filter:drop-shadow(0 3px 8px rgba(15,23,42,.14));transition:opacity .25s}
+.cn-node.dim .cn-logo{opacity:.25}
+.cn-center{fill:var(--red);stroke:#fff;stroke-width:3;filter:drop-shadow(0 8px 18px rgba(225,29,42,.45))}
+.cn-center-glyph{fill:#fff;font-size:30px;pointer-events:none}
+
+/* ============== CLIENTELE / ABOUT — responsive + a11y ============== */
+@media (max-width:760px){
+  .about-content__blocks--grid{grid-template-columns:1fr}
+  .clientele__stage{height:min(440px,60vh);min-height:360px}
+}
+/* Footer social image (Xiaohongshu rednote.png) */
+.footer__socials a img{width:20px;height:20px;object-fit:contain;display:block;filter:invert(1) brightness(1.15)}
+
+@media (prefers-reduced-motion: reduce){
+  .hero__logo{animation:none !important}
+  .hero__slide{transition:none !important}
+}
