@@ -830,7 +830,7 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
 /* ============== CLIENTELE / ABOUT — responsive + a11y ============== */
 @media (max-width:760px){
   .about-content__blocks--grid{grid-template-columns:1fr}
-  .clientele__stage{height:min(440px,60vh);min-height:360px}
+  .clientele__stage{height:min(560px,82vh);min-height:440px}
 }
 /* Footer social image (Xiaohongshu rednote.png) */
 .footer__socials a img{width:20px;height:20px;object-fit:contain;display:block;filter:invert(1) brightness(1.15)}

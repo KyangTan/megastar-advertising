@@ -24,8 +24,9 @@
   var BASE = 'assets/img/clientele/';
 
   /* Uniform logo height; width follows each image's natural ratio (capped). */
-  var NODE_H = 44;
   var MAX_RATIO = 3.2;
+  function nodeHFor(w){ return w < 760 ? 32 : 44; }   /* smaller logos on phones */
+  var NODE_H = 44;
 
   /* Preload every logo so we know its natural aspect ratio up front. */
   var pre = CLIENTS.map(function(f){ var im = new Image(); im.src = BASE + f; return im; });
@@ -42,6 +43,7 @@
     var width = mount.clientWidth || 960;
     var height = mount.clientHeight || 540;
     var cx = width / 2, cy = height / 2;
+    NODE_H = nodeHFor(width);
 
     var svg = d3.select(mount).append('svg')
       .attr('viewBox', '0 0 ' + width + ' ' + height)
@@ -170,6 +172,20 @@
         var h = mount.clientHeight || height;
         if(Math.abs(w - width) < 8 && Math.abs(h - height) < 8) return;
         width = w; height = h; cx = width/2; cy = height/2;
+        /* Resize the logos too when crossing the mobile/desktop breakpoint */
+        var newNodeH = nodeHFor(width);
+        if(newNodeH !== NODE_H){
+          NODE_H = newNodeH;
+          clients.forEach(function(c, i){
+            var ratio = Math.min((pre[i].naturalWidth / pre[i].naturalHeight) || 2.4, MAX_RATIO);
+            c.w = NODE_H * ratio; c.h = NODE_H; c.r = c.w / 2 + 6;
+          });
+          clientG.select('image')
+            .attr('x', function(d){ return -d.w / 2; })
+            .attr('y', function(d){ return -d.h / 2; })
+            .attr('width', function(d){ return d.w; })
+            .attr('height', function(d){ return d.h; });
+        }
         ringR = Math.min(width, height) * 0.36;
         center.x = cx; center.y = cy; center.fx = cx; center.fy = cy;
         svg.attr('viewBox', '0 0 ' + width + ' ' + height);
