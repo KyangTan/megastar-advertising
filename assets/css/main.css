@@ -829,6 +829,7 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
 
 /* ============== CLIENTELE / ABOUT — responsive + a11y ============== */
 @media (max-width:760px){
+  .hero{min-height:70svh;padding:112px 0 60px}
   .about-content__blocks--grid{grid-template-columns:1fr}
   .clientele__stage{height:min(560px,82vh);min-height:440px}
 }
