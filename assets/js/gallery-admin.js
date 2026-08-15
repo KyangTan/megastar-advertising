@@ -30,13 +30,14 @@
   if(!gallery) return;
 
   /* ---------- persistent overlay ---------- */
-  var overlay = { disabled: {}, titles: {}, cats: {}, order: null };
+  var overlay = { disabled: {}, titles: {}, cats: {}, orient: {}, order: null };
   try{
     var saved = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
     if(saved && typeof saved === 'object'){
       overlay.disabled = saved.disabled || {};
       overlay.titles = saved.titles || {};
       overlay.cats = saved.cats || {};
+      overlay.orient = saved.orient || {};
       overlay.order = Array.isArray(saved.order) ? saved.order : null;
     }
   }catch(e){}
@@ -54,6 +55,7 @@
   var catEditing = null;                                        // category edit
   var drag = null;                                                 // drag state
   var suppressClick = false, swallowT = null;
+  var pendingOrient = null;        // previewing orientation flip: {id: original}
 
   /* Swallow the click that follows a drag / edit-dismiss (see handlers) */
   function armSwallow(){
@@ -108,12 +110,23 @@
     });
   }
 
+  /* Apply saved orientation overrides in place (mutated refs => render
+     + export pick it up, like category overrides). */
+  function applyOrientationToItems(){
+    if(!originalItems) return;
+    originalItems.forEach(function(i){
+      var o = overlay.orient[i.id];
+      if(o === 'portrait' || o === 'landscape') i.orientation = o;
+    });
+  }
+
   /* ---------- hooks consumed by main.js ---------- */
   window.__applyAdminEdits = function(data){
     meta = data;
     var items = applyOrder(data.items.slice());
     originalItems = items;
     applyCatsToItems();
+    applyOrientationToItems();
     data.items = items.filter(function(i){ return !overlay.disabled[i.id]; });
   };
   window.__adminDisplayTitle = function(item){
@@ -135,6 +148,10 @@
   bar.innerHTML =
     '<span class="admin-bar__count">0 selected</span>' +
     '<button type="button" class="admin-bar__btn admin-bar__btn--danger" data-act="disable" hidden>Disable Selected</button>' +
+    '<button type="button" class="admin-bar__btn" data-act="orient" hidden>Change Orientation</button>' +
+    '<span class="admin-bar__confirm" hidden>Previewing orientation change — apply?</span>' +
+    '<button type="button" class="admin-bar__btn admin-bar__btn--danger" data-act="orient-apply" hidden>Apply</button>' +
+    '<button type="button" class="admin-bar__btn" data-act="orient-cancel" hidden>Cancel</button>' +
     '<button type="button" class="admin-bar__btn" data-act="showdisabled">Show Disabled</button>' +
     '<button type="button" class="admin-bar__btn" data-act="export">Export portfolio.json</button>' +
     '<button type="button" class="admin-bar__btn" data-act="clear">Clear local edits</button>' +
@@ -143,7 +160,13 @@
 
   var countEl = bar.querySelector('.admin-bar__count');
   var disableBtn = bar.querySelector('[data-act="disable"]');
+  var orientBtn = bar.querySelector('[data-act="orient"]');
+  var confirmNote = bar.querySelector('.admin-bar__confirm');
+  var applyBtn = bar.querySelector('[data-act="orient-apply"]');
+  var cancelBtn = bar.querySelector('[data-act="orient-cancel"]');
   var showBtn = bar.querySelector('[data-act="showdisabled"]');
+  var exportBtn = bar.querySelector('[data-act="export"]');
+  var clearBtn = bar.querySelector('[data-act="clear"]');
 
   function disabledCount(){
     if(!originalItems) return 0;
@@ -152,13 +175,83 @@
     return n;
   }
 
+  /* The fixed toolbar can wrap to 2 lines (extra buttons, narrow screens)
+     and then covers gallery tiles at the viewport bottom — keep the page's
+     bottom padding in sync with its real height. */
+  function syncBarPadding(){
+    document.body.style.paddingBottom = (bar.offsetHeight + 12) + 'px';
+  }
+
   function updateToolbar(){
     var n = Object.keys(selected).length;
-    countEl.textContent = n + ' selected';
-    disableBtn.hidden = n === 0;
+    var items = itemsForSelected();
+    var allP = n > 0 && items.every(function(i){ return i.orientation === 'portrait'; });
+    var allL = n > 0 && items.every(function(i){ return i.orientation === 'landscape'; });
+    var previewing = !!pendingOrient;
+
+    countEl.textContent = previewing
+      ? 'Previewing ' + Object.keys(pendingOrient).length + ' image' + (Object.keys(pendingOrient).length === 1 ? '' : 's')
+      : n + ' selected';
+    disableBtn.hidden = n === 0 || previewing;
     disableBtn.textContent = 'Disable ' + n + ' Image' + (n === 1 ? '' : 's');
+    orientBtn.hidden = n === 0 || previewing;
+    orientBtn.textContent = (allP ? 'Change to Landscape' : allL ? 'Change to Portrait' : 'Flip Orientation') +
+      ' (' + n + ')';
+    confirmNote.hidden = !previewing;
+    applyBtn.hidden = !previewing;
+    cancelBtn.hidden = !previewing;
+    showBtn.hidden = previewing;
+    exportBtn.hidden = previewing;
+    clearBtn.hidden = previewing;
     showBtn.textContent = (showDisabled ? 'Hide Disabled' : 'Show Disabled') +
       (disabledCount() ? ' (' + disabledCount() + ')' : '');
+    syncBarPadding();
+  }
+
+  /* ---------- orientation flip with live preview ---------- */
+  function itemsForSelected(){
+    var out = [];
+    if(!originalItems) return out;
+    originalItems.forEach(function(i){ if(selected[i.id] && out.indexOf(i) < 0) out.push(i); });
+    return out;
+  }
+
+  /* Flip in memory only, then re-render => live preview on the grid. */
+  function startPreviewOrient(){
+    if(pendingOrient) return;
+    var items = itemsForSelected();
+    if(!items.length) return;
+    pendingOrient = {};
+    items.forEach(function(i){
+      if(pendingOrient[i.id] == null) pendingOrient[i.id] = i.orientation;
+      i.orientation = (i.orientation === 'portrait') ? 'landscape' : 'portrait';
+    });
+    if(window.__megastarGallery) window.__megastarGallery.render();
+    updateToolbar();
+  }
+
+  /* Confirm: persist flips, clear selection, render final state. */
+  function applyPreviewOrient(){
+    if(!pendingOrient) return;
+    originalItems.forEach(function(i){
+      if(pendingOrient[i.id] != null) overlay.orient[i.id] = i.orientation;
+    });
+    pendingOrient = null;
+    selected = {};
+    saveOverlay();
+    refilterAndRender();
+    updateToolbar();
+  }
+
+  /* Cancel: restore original orientations, keep the selection. */
+  function cancelPreviewOrient(){
+    if(!pendingOrient) return;
+    originalItems.forEach(function(i){
+      if(pendingOrient[i.id] != null) i.orientation = pendingOrient[i.id];
+    });
+    pendingOrient = null;
+    if(window.__megastarGallery) window.__megastarGallery.render();
+    updateToolbar();
   }
 
   bar.addEventListener('click', function(e){
@@ -166,7 +259,16 @@
     if(!btn) return;
     var act = btn.getAttribute('data-act');
 
-    if(act === 'disable'){
+    if(act === 'orient'){
+      startPreviewOrient();
+
+    } else if(act === 'orient-apply'){
+      applyPreviewOrient();
+
+    } else if(act === 'orient-cancel'){
+      cancelPreviewOrient();
+
+    } else if(act === 'disable'){
       var ids = Object.keys(selected);
       if(!ids.length) return;
       if(!window.confirm('Disable ' + ids.length + ' image' + (ids.length === 1 ? '' : 's') +
@@ -184,7 +286,7 @@
       exportJson();
 
     } else if(act === 'clear'){
-      if(!window.confirm('Clear ALL local edits (disabled items, custom titles, categories and ordering) in this browser?')) return;
+      if(!window.confirm('Clear ALL local edits (disabled items, custom titles, categories, orientation and ordering) in this browser?')) return;
       try{ localStorage.removeItem(LS_KEY); }catch(e){}
       location.reload();
 
@@ -521,6 +623,16 @@
       var id = t.getAttribute('data-id');
       t.classList.toggle('admin-selected', !!(id && selected[id]));
     });
+    /* while previewing an orientation flip, force the new aspect on the
+       affected tiles so the change is visible regardless of grid slot */
+    if(pendingOrient){
+      gallery.querySelectorAll('.pitem[data-id]').forEach(function(t){
+        if(t.classList.contains('admin-disabled')) return;
+        if(pendingOrient[t.getAttribute('data-id')] == null) return;
+        var it = tileItemMap.get(t);
+        if(it) t.classList.add(it.orientation === 'portrait' ? 'admin-preview-tall' : 'admin-preview-wide');
+      });
+    }
     renderDisabledTiles();
     updateToolbar();
     observer.observe(gallery, { childList: true });
