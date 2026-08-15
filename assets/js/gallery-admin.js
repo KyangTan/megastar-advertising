@@ -483,6 +483,9 @@
   }
 
   function renderDisabledTiles(){
+    // always clear previously rendered disabled tiles first (the "Hide
+    // Disabled" toggle relies on this — decorate() doesn't rebuild the grid)
+    gallery.querySelectorAll('.pitem.admin-disabled').forEach(function(t){ t.remove(); });
     if(!showDisabled || !originalItems) return;
     var f = activeFilter();
     originalItems.forEach(function(item){
