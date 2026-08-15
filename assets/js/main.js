@@ -213,16 +213,23 @@
     return cleaned || categoryLabel;
   }
 
+  // Display title with admin override support (custom titles bypass cleanTitle)
+  function displayTitleFor(item){
+    var t = window.__adminDisplayTitle ? window.__adminDisplayTitle(item) : null;
+    return (t != null && t !== '') ? t : cleanTitle(item.title, item.category_label);
+  }
+
   // Build a portfolio item element
   function createItem(item, index){
     var div = document.createElement('div');
     div.className = 'pitem' + (item.orientation === 'portrait' && index % 5 === 2 ? ' tall' : '');
     div.setAttribute('data-cat', item.category);
     div.setAttribute('data-index', index);
+    if(item.id) div.setAttribute('data-id', item.id);
 
     var thumbSrc = item.thumb_webp || item.thumb;
     var fullSrc = item.full_webp || item.full;
-    var displayTitle = cleanTitle(item.title, item.category_label);
+    var displayTitle = displayTitleFor(item);
 
     div.innerHTML =
       '<picture>' +
@@ -240,6 +247,9 @@
 
     return div;
   }
+
+  // Admin-mode bridge (used by gallery-admin.js; harmless otherwise)
+  window.__megastarGallery = { render: function(){ renderGallery(); } };
 
   // Render the gallery with current filter
   function renderGallery(){
@@ -343,7 +353,7 @@
     if(!lightboxItems.length) return;
     var item = lightboxItems[lightboxIndex];
     var fullSrc = item.full_webp || item.full;
-    var displayTitle = cleanTitle(item.title, item.category_label);
+    var displayTitle = displayTitleFor(item);
 
     lbImg.src = fullSrc;
     lbImg.alt = displayTitle + ' — ' + item.category_label;
@@ -388,6 +398,7 @@
     fetch(dataPath)
       .then(function(r){ return r.json(); })
       .then(function(data){
+        if(window.__applyAdminEdits) window.__applyAdminEdits(data);
         PORTFOLIO_DATA = data;
 
         // For the homepage, curate: diverse items per filter, no duplicate projects
