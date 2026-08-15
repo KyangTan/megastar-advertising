@@ -201,6 +201,9 @@
     // swallow the click that ends a drag / dismisses an editor
     if(suppressClick){ suppressClick = false; e.preventDefault(); e.stopPropagation(); return; }
 
+    // native <select> interaction (listbox options) — never intercept
+    if(e.target.closest('.admin-cat-select')) return;
+
     // finish any in-progress category / title edit; swallow the dismiss click
     if(catEditing){ finishCatEdit(true); e.preventDefault(); e.stopPropagation(); return; }
     if(editingEl){ finishEdit(); e.preventDefault(); e.stopPropagation(); return; }
@@ -278,6 +281,10 @@
 
     var select = document.createElement('select');
     select.className = 'admin-cat-select';
+    /* size>1 renders an always-open listbox — a native dropdown popup
+       cannot be opened programmatically, and intercepting the click that
+       opens it would destroy the editor (see bug report). */
+    select.setAttribute('size', '8');
     Object.keys(map).forEach(function(slug){
       var o = document.createElement('option');
       o.value = slug;

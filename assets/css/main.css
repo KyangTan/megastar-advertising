@@ -877,10 +877,13 @@ body.admin-on .pitem__title{cursor:text}
 body.admin-on .pitem__cat{cursor:pointer}
 .pitem__cat.admin-cat-hidden{display:none}
 .admin-cat-select{
-  background:#111526;color:var(--amber);border:1px solid rgba(250,204,21,.5);
-  font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  border-radius:6px;padding:4px 6px;max-width:100%;margin:4px 0;
+  position:absolute;inset:8px;z-index:6;overflow:auto;
+  background:rgba(11,15,26,.96);color:var(--amber);
+  border:1px solid rgba(250,204,21,.55);border-radius:8px;padding:6px;
+  font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
 }
+.admin-cat-select option{padding:7px 6px;border-radius:4px}
+.admin-cat-select option:checked{background:var(--red);color:#fff}
 
 /* Admin: drag-to-reorder */
 body.admin-on .pitem{touch-action:manipulation}
