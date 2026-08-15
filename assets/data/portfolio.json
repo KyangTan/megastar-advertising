@@ -123,21 +123,6 @@
       "orig_h": 944
     },
     {
-      "id": "3d-led-2022-12-12_amlex_3d_led_signage_13",
-      "category": "3d-led",
-      "category_label": "3D LED Signage",
-      "title": "2022-12-12 AMLEX 3D LED SIGNAGE 13",
-      "full": "assets/img/full/3d-led-2022-12-12_amlex_3d_led_signage_13.jpg",
-      "full_webp": "assets/img/full/3d-led-2022-12-12_amlex_3d_led_signage_13.webp",
-      "thumb": "assets/img/thumb/3d-led-2022-12-12_amlex_3d_led_signage_13.jpg",
-      "thumb_webp": "assets/img/thumb/3d-led-2022-12-12_amlex_3d_led_signage_13.webp",
-      "width": 750,
-      "height": 1000,
-      "orientation": "portrait",
-      "orig_w": 750,
-      "orig_h": 1000
-    },
-    {
       "id": "3d-led-2022-12-12_amlex_3d_led_signage_7",
       "category": "3d-led",
       "category_label": "3D LED Signage",
@@ -408,36 +393,6 @@
       "orig_h": 1280
     },
     {
-      "id": "3d-led-jms_2",
-      "category": "3d-led",
-      "category_label": "3D LED Signage",
-      "title": "JMS 2",
-      "full": "assets/img/full/3d-led-jms_2.jpg",
-      "full_webp": "assets/img/full/3d-led-jms_2.webp",
-      "thumb": "assets/img/thumb/3d-led-jms_2.jpg",
-      "thumb_webp": "assets/img/thumb/3d-led-jms_2.webp",
-      "width": 1280,
-      "height": 960,
-      "orientation": "landscape",
-      "orig_w": 1280,
-      "orig_h": 960
-    },
-    {
-      "id": "3d-led-jms_sport_centre",
-      "category": "3d-led",
-      "category_label": "3D LED Signage",
-      "title": "JMS SPORT CENTRE",
-      "full": "assets/img/full/3d-led-jms_sport_centre.jpg",
-      "full_webp": "assets/img/full/3d-led-jms_sport_centre.webp",
-      "thumb": "assets/img/thumb/3d-led-jms_sport_centre.jpg",
-      "thumb_webp": "assets/img/thumb/3d-led-jms_sport_centre.webp",
-      "width": 1280,
-      "height": 960,
-      "orientation": "landscape",
-      "orig_w": 1280,
-      "orig_h": 960
-    },
-    {
       "id": "3d-led-jms_supermarket",
       "category": "3d-led",
       "category_label": "3D LED Signage",
@@ -491,21 +446,6 @@
       "full_webp": "assets/img/full/3d-led-kim_khean_engineering.webp",
       "thumb": "assets/img/thumb/3d-led-kim_khean_engineering.jpg",
       "thumb_webp": "assets/img/thumb/3d-led-kim_khean_engineering.webp",
-      "width": 1280,
-      "height": 960,
-      "orientation": "landscape",
-      "orig_w": 1280,
-      "orig_h": 960
-    },
-    {
-      "id": "3d-led-klinik_bliss_2",
-      "category": "3d-led",
-      "category_label": "3D LED Signage",
-      "title": "KLINIK BLISS 2",
-      "full": "assets/img/full/3d-led-klinik_bliss_2.jpg",
-      "full_webp": "assets/img/full/3d-led-klinik_bliss_2.webp",
-      "thumb": "assets/img/thumb/3d-led-klinik_bliss_2.jpg",
-      "thumb_webp": "assets/img/thumb/3d-led-klinik_bliss_2.webp",
       "width": 1280,
       "height": 960,
       "orientation": "landscape",
@@ -611,11 +551,11 @@
       "full_webp": "assets/img/full/3d-led-polo_club_2.webp",
       "thumb": "assets/img/thumb/3d-led-polo_club_2.jpg",
       "thumb_webp": "assets/img/thumb/3d-led-polo_club_2.webp",
-      "width": 809,
-      "height": 1080,
-      "orientation": "portrait",
-      "orig_w": 809,
-      "orig_h": 1080
+      "width": 1080,
+      "height": 809,
+      "orientation": "landscape",
+      "orig_w": 1080,
+      "orig_h": 809
     },
     {
       "id": "3d-led-polo_club",
@@ -798,21 +738,6 @@
       "orig_h": 1280
     },
     {
-      "id": "3d-signage-2022-09-05_amlex_02",
-      "category": "3d-signage",
-      "category_label": "3D Signage",
-      "title": "2022-09-05 AMLEX 02",
-      "full": "assets/img/full/3d-signage-2022-09-05_amlex_02.jpg",
-      "full_webp": "assets/img/full/3d-signage-2022-09-05_amlex_02.webp",
-      "thumb": "assets/img/thumb/3d-signage-2022-09-05_amlex_02.jpg",
-      "thumb_webp": "assets/img/thumb/3d-signage-2022-09-05_amlex_02.webp",
-      "width": 1280,
-      "height": 960,
-      "orientation": "landscape",
-      "orig_w": 1280,
-      "orig_h": 960
-    },
-    {
       "id": "3d-signage-2022-09-05_amlex_03",
       "category": "3d-signage",
       "category_label": "3D Signage",
@@ -826,21 +751,6 @@
       "orientation": "portrait",
       "orig_w": 960,
       "orig_h": 1280
-    },
-    {
-      "id": "3d-signage-2023-04-25_fong_seng_hardware_01",
-      "category": "3d-signage",
-      "category_label": "3D Signage",
-      "title": "2023-04-25 FONG SENG HARDWARE 01",
-      "full": "assets/img/full/3d-signage-2023-04-25_fong_seng_hardware_01.jpg",
-      "full_webp": "assets/img/full/3d-signage-2023-04-25_fong_seng_hardware_01.webp",
-      "thumb": "assets/img/thumb/3d-signage-2023-04-25_fong_seng_hardware_01.jpg",
-      "thumb_webp": "assets/img/thumb/3d-signage-2023-04-25_fong_seng_hardware_01.webp",
-      "width": 1280,
-      "height": 960,
-      "orientation": "landscape",
-      "orig_w": 1280,
-      "orig_h": 960
     },
     {
       "id": "3d-signage-2023-04-25_fong_seng_hardware_02",
@@ -871,36 +781,6 @@
       "orientation": "landscape",
       "orig_w": 1280,
       "orig_h": 960
-    },
-    {
-      "id": "3d-signage-2023-05-05_bomba_taman_sukun_02",
-      "category": "3d-signage",
-      "category_label": "3D Signage",
-      "title": "2023-05-05 BOMBA TAMAN SUKUN 02",
-      "full": "assets/img/full/3d-signage-2023-05-05_bomba_taman_sukun_02.jpg",
-      "full_webp": "assets/img/full/3d-signage-2023-05-05_bomba_taman_sukun_02.webp",
-      "thumb": "assets/img/thumb/3d-signage-2023-05-05_bomba_taman_sukun_02.jpg",
-      "thumb_webp": "assets/img/thumb/3d-signage-2023-05-05_bomba_taman_sukun_02.webp",
-      "width": 1280,
-      "height": 960,
-      "orientation": "landscape",
-      "orig_w": 1280,
-      "orig_h": 960
-    },
-    {
-      "id": "3d-signage-2023-05-08_bomba_taman_sukun",
-      "category": "3d-signage",
-      "category_label": "3D Signage",
-      "title": "2023-05-08 BOMBA TAMAN SUKUN",
-      "full": "assets/img/full/3d-signage-2023-05-08_bomba_taman_sukun.jpg",
-      "full_webp": "assets/img/full/3d-signage-2023-05-08_bomba_taman_sukun.webp",
-      "thumb": "assets/img/thumb/3d-signage-2023-05-08_bomba_taman_sukun.jpg",
-      "thumb_webp": "assets/img/thumb/3d-signage-2023-05-08_bomba_taman_sukun.webp",
-      "width": 1280,
-      "height": 596,
-      "orientation": "landscape",
-      "orig_w": 3264,
-      "orig_h": 1520
     },
     {
       "id": "3d-signage-2023-05-08_bomba_taman_sukun",
