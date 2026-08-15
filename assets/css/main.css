@@ -873,6 +873,26 @@ body.admin-on .pitem__title{cursor:text}
 .admin-bar__btn--ghost{opacity:.75}
 .admin-bar__note{color:rgba(255,255,255,.55);font-size:.7rem;margin-left:auto}
 
+/* Admin: category editing */
+body.admin-on .pitem__cat{cursor:pointer}
+.pitem__cat.admin-cat-hidden{display:none}
+.admin-cat-select{
+  background:#111526;color:var(--amber);border:1px solid rgba(250,204,21,.5);
+  font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  border-radius:6px;padding:4px 6px;max-width:100%;margin:4px 0;
+}
+
+/* Admin: drag-to-reorder */
+body.admin-on .pitem{touch-action:manipulation}
+.pitem.admin-dragging{opacity:.35;outline:2px dashed var(--muted)}
+.pitem.admin-drop-target{outline:3px solid var(--amber);outline-offset:2px}
+.admin-ghost{
+  position:fixed;z-index:9999;pointer-events:none;opacity:.9;
+  transform:scale(.95);border-radius:var(--radius-lg);overflow:hidden;
+  box-shadow:0 18px 50px rgba(0,0,0,.5);
+}
+.admin-ghost .pitem__overlay{opacity:1;transform:none}
+
 @media (prefers-reduced-motion: reduce){
   .hero__logo{animation:none !important}
   .hero__slide{transition:none !important}
