@@ -719,6 +719,7 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
 /* ============== RESPONSIVE ============== */
 @media (max-width:1080px){
   .services .grid{grid-template-columns:repeat(2,1fr)}
+  .facilities .grid{grid-template-columns:repeat(2,1fr)}
   .pgallery{grid-template-columns:repeat(2,1fr)}
   .why__grid{grid-template-columns:1fr;gap:40px}
 }
@@ -733,6 +734,7 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
 }
 @media (max-width:640px){
   .services .grid{grid-template-columns:1fr}
+  .facilities .grid{grid-template-columns:1fr}
   .pgallery{grid-template-columns:repeat(2,1fr);gap:10px}
   .footer__top{grid-template-columns:1fr;gap:30px}
   .stats{grid-template-columns:1fr}
