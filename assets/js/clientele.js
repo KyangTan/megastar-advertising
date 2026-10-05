@@ -84,11 +84,19 @@
       .attr('class', 'cn-node')
       .attr('transform', function(d){ return 'translate(' + d.x + ',' + d.y + ')'; });
 
-    /* Center node: red disc + star glyph */
+    /* Center node: red disc + MS outline mark (transparent background) */
     var centerG = nodeSel.filter(function(d){ return d.center; });
     centerG.append('circle').attr('class', 'cn-center').attr('r', function(d){ return d.r; });
-    centerG.append('text').attr('class', 'cn-center-glyph').attr('text-anchor', 'middle')
-      .attr('dominant-baseline', 'central').text('★');
+    var markW = 68, markH = 36;
+    centerG.append('image')
+      .attr('class', 'cn-center-mark')
+      .attr('href', 'assets/img/logo/ms-outline-mark.png')
+      .attr('xlink:href', 'assets/img/logo/ms-outline-mark.png')
+      .attr('width', markW)
+      .attr('height', markH)
+      .attr('x', -markW / 2)
+      .attr('y', -markH / 2)
+      .attr('preserveAspectRatio', 'xMidYMid meet');
 
     /* Client nodes: raw logo at natural ratio, uniform height, no box */
     var clientG = nodeSel.filter(function(d){ return !d.center; });

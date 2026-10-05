@@ -596,7 +596,7 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
 }
 .pitem:hover .pitem__overlay{transform:translateY(0);opacity:1}
 .pitem__cat{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
-.pitem__title{font-family:var(--font-display);text-transform:uppercase;font-size:1.25rem;color:#fff;margin-top:4px}
+.pitem__title{display:none}
 .pitem.hide{display:none}
 
 /* load more button */
@@ -692,7 +692,7 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
 .lightbox__wrap{max-width:90vw;max-height:85vh;text-align:center;position:relative}
 .lightbox__wrap img{max-width:90vw;max-height:75vh;border-radius:var(--radius-lg);object-fit:contain}
 .lightbox__meta{margin-top:16px;color:#fff}
-.lightbox__title{font-family:var(--font-display);text-transform:uppercase;font-size:1.2rem;color:#fff}
+.lightbox__title{display:none}
 .lightbox__cat{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:4px}
 .lightbox__counter{font-size:.82rem;color:rgba(255,255,255,.5);margin-top:8px}
 
@@ -827,7 +827,7 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
 .cn-logo{filter:drop-shadow(0 3px 8px rgba(15,23,42,.14));transition:opacity .25s}
 .cn-node.dim .cn-logo{opacity:.25}
 .cn-center{fill:var(--red);stroke:#fff;stroke-width:3;filter:drop-shadow(0 8px 18px rgba(225,29,42,.45))}
-.cn-center-glyph{fill:#fff;font-size:30px;pointer-events:none}
+.cn-center-mark{pointer-events:none}
 
 /* ============== CLIENTELE / ABOUT — responsive + a11y ============== */
 @media (max-width:760px){
