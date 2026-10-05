@@ -826,7 +826,7 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
 .cn-node.dragging{cursor:grabbing}
 .cn-logo{filter:drop-shadow(0 3px 8px rgba(15,23,42,.14));transition:opacity .25s}
 .cn-node.dim .cn-logo{opacity:.25}
-.cn-center{fill:var(--red);stroke:#fff;stroke-width:3;filter:drop-shadow(0 8px 18px rgba(225,29,42,.45))}
+.cn-center{fill:#000;stroke:#fff;stroke-width:3;filter:drop-shadow(0 8px 18px rgba(0,0,0,.45))}
 .cn-center-mark{pointer-events:none}
 
 /* ============== CLIENTELE / ABOUT — responsive + a11y ============== */
