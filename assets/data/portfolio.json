@@ -59,6 +59,10 @@
     "OTHERS": {
       "slug": "others",
       "label": "Other Work"
+    },
+    "COMBINATION SERIES": {
+      "slug": "combination-series",
+      "label": "Combination Series"
     }
   },
   "items": [
@@ -5686,11 +5690,71 @@
       "orientation": "landscape",
       "orig_w": 1024,
       "orig_h": 768
+    },
+    {
+      "id": "combination-series-sika",
+      "category": "combination-series",
+      "category_label": "Combination Series",
+      "title": "Sika",
+      "full": "assets/img/full/combination-series-sika.jpg",
+      "full_webp": "assets/img/full/combination-series-sika.webp",
+      "thumb": "assets/img/thumb/combination-series-sika.jpg",
+      "thumb_webp": "assets/img/thumb/combination-series-sika.webp",
+      "width": 1024,
+      "height": 1280,
+      "orientation": "portrait",
+      "orig_w": 1600,
+      "orig_h": 2000
+    },
+    {
+      "id": "combination-series-hungry-guide",
+      "category": "combination-series",
+      "category_label": "Combination Series",
+      "title": "Hungry Guide",
+      "full": "assets/img/full/combination-series-hungry-guide.jpg",
+      "full_webp": "assets/img/full/combination-series-hungry-guide.webp",
+      "thumb": "assets/img/thumb/combination-series-hungry-guide.jpg",
+      "thumb_webp": "assets/img/thumb/combination-series-hungry-guide.webp",
+      "width": 1024,
+      "height": 1280,
+      "orientation": "portrait",
+      "orig_w": 1600,
+      "orig_h": 2000
+    },
+    {
+      "id": "combination-series-dobi-sekeluarga",
+      "category": "combination-series",
+      "category_label": "Combination Series",
+      "title": "Dobi Sekeluarga",
+      "full": "assets/img/full/combination-series-dobi-sekeluarga.jpg",
+      "full_webp": "assets/img/full/combination-series-dobi-sekeluarga.webp",
+      "thumb": "assets/img/thumb/combination-series-dobi-sekeluarga.jpg",
+      "thumb_webp": "assets/img/thumb/combination-series-dobi-sekeluarga.webp",
+      "width": 1024,
+      "height": 1280,
+      "orientation": "portrait",
+      "orig_w": 1600,
+      "orig_h": 2000
+    },
+    {
+      "id": "combination-series-cizen-mart",
+      "category": "combination-series",
+      "category_label": "Combination Series",
+      "title": "Cizen Mart",
+      "full": "assets/img/full/combination-series-cizen-mart.jpg",
+      "full_webp": "assets/img/full/combination-series-cizen-mart.webp",
+      "thumb": "assets/img/thumb/combination-series-cizen-mart.jpg",
+      "thumb_webp": "assets/img/thumb/combination-series-cizen-mart.webp",
+      "width": 1024,
+      "height": 1280,
+      "orientation": "portrait",
+      "orig_w": 1600,
+      "orig_h": 2000
     }
   ],
   "stats": {
-    "total": 678,
-    "processed": 678,
+    "total": 379,
+    "processed": 379,
     "errors": 0
   }
 }
