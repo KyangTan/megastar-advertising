@@ -22,9 +22,11 @@
       // outgoing slide drifts left and fades
       slides[current].classList.remove('active');
       slides[current].classList.add('exit');
+      slides[current].setAttribute('aria-hidden', 'true');
 
       // incoming slide arrives from the right
       slides[next].classList.add('active');
+      slides[next].removeAttribute('aria-hidden');
 
       // after the transition, drop the exited slide back to the
       // right-hand "ready" position (invisible, so the snap is hidden)
