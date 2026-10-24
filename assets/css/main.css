@@ -795,7 +795,7 @@ main,section{scroll-margin-top:var(--nav-h)}
 .clientele .section-head{text-align:center;margin-left:auto;margin-right:auto}
 .clientele__stage{
   position:relative;width:100%;
-  height:min(580px,72vh);min-height:440px;
+  height:min(700px,76vh);min-height:520px;
   border-radius:var(--radius-lg);
   background:radial-gradient(circle at 50% 42%, #ffffff 0%, var(--bg-alt) 78%);
   border:1px solid var(--line);overflow:hidden;
@@ -828,12 +828,14 @@ main,section{scroll-margin-top:var(--nav-h)}
 .cn-node.dim .cn-logo{opacity:.25}
 .cn-center{fill:#000;stroke:#fff;stroke-width:3;filter:drop-shadow(0 8px 18px rgba(0,0,0,.45))}
 .cn-center-mark{pointer-events:none}
+.cn-center-badge{pointer-events:none;filter:drop-shadow(0 8px 16px rgba(0,0,0,.35))}
 
 /* ============== CLIENTELE / ABOUT — responsive + a11y ============== */
 @media (max-width:760px){
   .hero{min-height:calc(70svh - var(--nav-h));padding:36px 0 60px}
   .about-content__blocks--grid{grid-template-columns:1fr}
-  .clientele__stage{height:min(560px,82vh);min-height:440px}
+  .clientele .wrap{padding-left:8px;padding-right:8px}
+  .clientele__stage{height:min(680px,86vh);min-height:520px}
 }
 /* Footer social image (Xiaohongshu rednote.png) */
 .footer__socials a img{width:20px;height:20px;object-fit:contain;display:block;filter:invert(1) brightness(1.15)}
