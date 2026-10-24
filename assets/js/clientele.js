@@ -38,6 +38,7 @@
     { file: "mici-quality-paint.webp", name: "Mici Quality Paint" },
     { file: "masterkids.webp", name: "Masterkids's" },
     { file: "mapei.webp", name: "Mapei" },
+    { file: "kansai-paint.webp", name: "Kansai Paint" },
     { file: "federal-paint.webp", name: "Federal Paint" },
     { file: "dulux.webp", name: "Dulux" },
     { file: "cze-city-zone-express.webp", name: "CZE City Zone Express Sdn Bhd" },
