@@ -80,8 +80,13 @@ button{font-family:inherit;cursor:pointer}
   box-shadow:none;
   padding:0;
 }
-.nav__inner{display:flex;align-items:center;justify-content:space-between;gap:18px;width:100%}
-.nav__logo{display:flex;align-items:center;flex:none;text-decoration:none}
+.nav__inner{
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;
+  width:100%;max-width:none;margin:0;padding:0 24px;
+}
+.nav__logo{grid-column:1;justify-self:start;display:flex;align-items:center;text-decoration:none}
+.nav .btn{grid-column:3;justify-self:end}
+.nav .burger{grid-column:3;justify-self:end}
 .nav__logo img{height:68px;width:auto}
 .wordmark{
   font-family:var(--font-display);font-weight:700;text-transform:uppercase;
@@ -89,7 +94,7 @@ button{font-family:inherit;cursor:pointer}
 }
 .wordmark .star{color:var(--red)}
 
-.nav__links{display:flex;align-items:center;gap:28px}
+.nav__links{grid-column:2;justify-self:center;display:flex;align-items:center;gap:28px}
 .nav__links a{
   font-size:.82rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
   color:rgba(255,255,255,.85);position:relative;padding:6px 0;transition:color .25s var(--ease);
@@ -718,6 +723,7 @@ main,section{scroll-margin-top:var(--nav-h)}
 @media (max-width:900px){
   :root{--nav-h:74px}
   .nav__logo img{height:56px}
+  .nav__inner{padding:0 16px}
   .nav__links,.nav .btn{display:none}
   .burger{display:block}
   .hero__grid{grid-template-columns:1fr;gap:40px}
