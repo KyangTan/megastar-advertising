@@ -828,6 +828,7 @@ body.menu-open .overlay a:nth-child(6){transition-delay:.42s}
 .cn-node.dim .cn-logo{opacity:.25}
 .cn-center{fill:#000;stroke:#fff;stroke-width:3;filter:drop-shadow(0 8px 18px rgba(0,0,0,.45))}
 .cn-center-mark{pointer-events:none}
+.cn-center-badge{pointer-events:none;filter:drop-shadow(0 8px 16px rgba(0,0,0,.35))}
 
 /* ============== CLIENTELE / ABOUT — responsive + a11y ============== */
 @media (max-width:760px){

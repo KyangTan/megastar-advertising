@@ -100,7 +100,8 @@
     var pad = width < 760 ? 6 : 10;
     var gap = 6;
     var radius = 16; /* stage corner radius, plus a little slack */
-    var centerR = width < 760 ? 34 : 46;
+    /* Full badge is larger than the old MS mark so the wordmark stays readable. */
+    var centerR = width < 760 ? 86 : 108;
     var btn = { x0: width - 66, y0: 6, x1: width - 6, y1: 62 };
     var best = null;
 
@@ -227,18 +228,18 @@
       .attr('transform', function(d){ return 'translate(' + d.x + ',' + d.y + ')'; });
 
     var centerG = nodeSel.filter(function(d){ return d.center; });
-    centerG.append('circle').attr('class', 'cn-center').attr('r', geom.centerR);
-    var mark = markSize(geom.centerR);
-    centerG.append('image')
-      .attr('class', 'cn-center-mark')
-      .attr('href', 'assets/img/logo/ms-outline-mark.png')
-      .attr('xlink:href', 'assets/img/logo/ms-outline-mark.png')
-      .attr('width', mark.w)
-      .attr('height', mark.h)
-      .attr('x', -mark.w / 2)
-      .attr('y', -mark.h / 2)
+    var badge = centerG.append('image')
+      .attr('class', 'cn-center-badge')
+      .attr('role', 'img')
+      .attr('aria-label', 'Megastar Advertising Signcraft')
+      .attr('href', 'assets/img/logo/megastar-center-badge.webp')
+      .attr('xlink:href', 'assets/img/logo/megastar-center-badge.webp')
+      .attr('width', geom.centerR * 2)
+      .attr('height', geom.centerR * 2)
+      .attr('x', -geom.centerR)
+      .attr('y', -geom.centerR)
       .attr('preserveAspectRatio', 'xMidYMid meet');
-    centerG.append('title').text('Megastar');
+    badge.append('title').text('Megastar Advertising Signcraft');
 
     var clientG = nodeSel.filter(function(d){ return !d.center; });
     var logos = clientG.append('image')
@@ -254,20 +255,17 @@
       .attr('preserveAspectRatio', 'xMidYMid meet');
     logos.append('title').text(function(d){ return d.name; });
 
-    function markSize(r){
-      return { w: Math.round(r * (68 / 46)), h: Math.round(r * (36 / 46)) };
-    }
     function applyLogoSize(){
       clientG.select('image.cn-logo')
         .attr('x', function(d){ return -d.s / 2; })
         .attr('y', function(d){ return -d.s / 2; })
         .attr('width', function(d){ return d.s; })
         .attr('height', function(d){ return d.s; });
-      centerG.select('circle').attr('r', center.r);
-      var m = markSize(center.r);
-      centerG.select('image')
-        .attr('width', m.w).attr('height', m.h)
-        .attr('x', -m.w / 2).attr('y', -m.h / 2);
+      centerG.select('image.cn-center-badge')
+        .attr('width', center.r * 2)
+        .attr('height', center.r * 2)
+        .attr('x', -center.r)
+        .attr('y', -center.r);
     }
 
     var introTimer = null;
