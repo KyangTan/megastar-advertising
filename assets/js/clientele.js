@@ -1,10 +1,8 @@
 /* ============================================================
    CLIENTELE — client logo network
-   Square brand tiles sit on one even ring around the central
-   Megastar mark. Lines, drag, hover, and the reset button
-   match the previous network. The ring is an ellipse so the
-   tiles use the stage and stay clear of each other and the
-   edges on both desktop and mobile.
+   Square brand tiles float around the Megastar badge on
+   springy links. A light bias toward an even ring keeps the
+   29 tiles spread out, clear of the badge, and inside the stage.
    ============================================================ */
 (function(){
   "use strict";
@@ -189,27 +187,27 @@
     };
     var clients = CLIENTS.map(function(c, i){
       var slot = slots[i];
-      var start = inward(slot, 0.42);
       return {
         id: 'c' + i,
         i: i,
         name: c.name,
         src: BASE + c.file,
         s: geom.S,
-        x: start.x,
-        y: start.y
+        x: slot.x,
+        y: slot.y
       };
     });
     var nodes = [center].concat(clients);
+    /* String ids are resolved to node objects by forceLink's id accessor. */
     var links = clients.map(function(c){ return { source: 'megastar', target: c.id }; });
 
-    function inward(slot, frac){
-      return {
-        x: cx + (slot.x - cx) * frac,
-        y: cy + (slot.y - cy) * frac
-      };
-    }
     function slotOf(d){ return slots[d.i]; }
+    function linkDistance(l){
+      var node = l.target;
+      var slot = node && slots[node.i];
+      if(!slot) return Math.min(width, height) * 0.36;
+      return Math.hypot(slot.x - cx, slot.y - cy);
+    }
 
     var svg = d3.select(mount).append('svg')
       .attr('viewBox', '0 0 ' + width + ' ' + height)
@@ -268,11 +266,7 @@
         .attr('y', -center.r);
     }
 
-    var introTimer = null;
-    function stopIntro(){ if(introTimer){ introTimer.stop(); introTimer = null; } }
-
     function dragStart(event, d){
-      stopIntro();
       if(!event.active) simulation.alphaTarget(0.3).restart();
       d.fx = d.x; d.fy = d.y;
       d3.select(this).classed('dragging', true);
@@ -296,27 +290,40 @@
       });
     }
 
+    /* Same forces as the pre-rewrite network: springy links, mutual
+       repulsion, collision, and a weak pull toward the middle. The ring
+       bias is only a nudge, so a drag still makes neighbours drift. */
     var simulation = d3.forceSimulation(nodes)
-      .force('slot', function(alpha){
+      .force('link', d3.forceLink(links).id(function(d){ return d.id; })
+        .distance(linkDistance).strength(0.5))
+      .force('charge', d3.forceManyBody().strength(-240))
+      .force('collide', d3.forceCollide().radius(function(d){
+        return d.center ? d.r + 8 : d.s / 2 + 6;
+      }).strength(0.9).iterations(2))
+      .force('x', d3.forceX(cx).strength(0.05))
+      .force('y', d3.forceY(cy).strength(0.05))
+      .force('ring', function(alpha){
         clients.forEach(function(c){
           if(c.fx != null) return;
           var t = slotOf(c);
-          c.vx += (t.x - c.x) * 0.85 * alpha;
-          c.vy += (t.y - c.y) * 0.85 * alpha;
+          c.vx += (t.x - c.x) * 0.045 * alpha;
+          c.vy += (t.y - c.y) * 0.045 * alpha;
         });
       })
-      .force('collide', d3.forceCollide().radius(function(d){
-        return d.center ? d.r + 4 : d.s / 2 + 2;
-      }).strength(0.9).iterations(2))
-      .force('charge', d3.forceManyBody().strength(function(d){ return d.center ? 0 : -18; }))
-      .alphaDecay(reduce ? 1 : 0.028)
-      .alphaMin(0.02)
-      .velocityDecay(0.5);
+      .alphaDecay(reduce ? 0.5 : 0.03)
+      .velocityDecay(0.6);
 
     function clamp(d){
-      var h = (d.s || 0) / 2 + 2;
-      d.x = Math.max(h, Math.min(width - h, d.x));
-      d.y = Math.max(h, Math.min(height - h, d.y));
+      var half = (d.s || 0) / 2 + 4;
+      d.x = Math.max(half, Math.min(width - half, d.x));
+      d.y = Math.max(half, Math.min(height - half, d.y));
+      var dx = d.x - cx, dy = d.y - cy;
+      var dist = Math.sqrt(dx * dx + dy * dy) || 1;
+      var min = center.r + half + 4;
+      if(dist < min){
+        d.x = cx + dx / dist * min;
+        d.y = cy + dy / dist * min;
+      }
     }
     function tick(){
       clients.forEach(clamp);
@@ -328,60 +335,19 @@
       nodeSel.attr('transform', function(d){ return 'translate(' + d.x + ',' + d.y + ')'; });
     }
     simulation.on('tick', tick);
-    simulation.on('end', function(){
-      clients.forEach(function(c){
-        if(c.fx != null) return;
-        var t = slotOf(c);
-        c.x = t.x; c.y = t.y; c.vx = 0; c.vy = 0;
-      });
-      tick();
-    });
-    simulation.stop();
-
-    /* Logos travel out along their lines, then rest on the ring.
-       Drag releases back into the same force simulation. */
-    function playIntro(){
-      stopIntro();
-      simulation.stop();
-      clients.forEach(function(c){
-        c.fx = null; c.fy = null; c.vx = 0; c.vy = 0;
-      });
-      if(reduce){
-        clients.forEach(function(c){
-          var t = slotOf(c);
-          c.x = t.x; c.y = t.y;
-        });
-        tick();
-        return;
-      }
-      introTimer = d3.timer(function(elapsed){
-        var u = Math.min(1, elapsed / 1200);
-        var eased = 1 - Math.pow(1 - u, 3);
-        var frac = 0.34 + 0.66 * eased;
-        clients.forEach(function(c){
-          if(c.fx != null) return;
-          var t = slotOf(c);
-          c.x = cx + (t.x - cx) * frac;
-          c.y = cy + (t.y - cy) * frac;
-          c.vx = 0; c.vy = 0;
-        });
-        tick();
-        if(u >= 1){
-          stopIntro();
-          clients.forEach(function(c){
-            if(c.fx != null) return;
-            var t = slotOf(c);
-            c.x = t.x; c.y = t.y;
-          });
-          tick();
-        }
-      });
-    }
-    playIntro();
+    if(reduce){ simulation.alpha(0).stop(); simulation.tick(300); tick(); }
 
     var resetBtn = document.getElementById('clienteleReset');
     if(resetBtn){
-      resetBtn.addEventListener('click', function(){ playIntro(); });
+      resetBtn.addEventListener('click', function(){
+        clients.forEach(function(c){
+          var t = slotOf(c);
+          c.x = t.x; c.y = t.y;
+          c.fx = null; c.fy = null; c.vx = 0; c.vy = 0;
+        });
+        if(reduce){ tick(); }
+        else { simulation.alpha(1).restart(); }
+      });
     }
 
     var rt;
@@ -398,16 +364,10 @@
         clients.forEach(function(c){ c.s = geom.S; });
         applyLogoSize();
         svg.attr('viewBox', '0 0 ' + width + ' ' + height);
-        stopIntro();
-        if(reduce){
-          clients.forEach(function(c){
-            var t = slotOf(c);
-            c.x = t.x; c.y = t.y;
-          });
-          tick();
-        } else {
-          simulation.alpha(0.8).restart();
-        }
+        simulation.force('x', d3.forceX(cx).strength(0.05));
+        simulation.force('y', d3.forceY(cy).strength(0.05));
+        if(reduce){ tick(); }
+        else { simulation.alpha(0.6).restart(); }
       }, 180);
     });
   }

@@ -818,7 +818,7 @@ main,section{scroll-margin-top:var(--nav-h)}
   padding:6px 12px;border-radius:999px;border:1px solid var(--line);
   pointer-events:none;
 }
-.cn-links line{stroke:rgba(15,23,42,.14);stroke-width:1.5;transition:stroke .25s, stroke-width .25s, opacity .25s}
+.cn-links line{stroke:rgba(15,23,42,.4);stroke-width:1.75;transition:stroke .25s, stroke-width .25s, opacity .25s}
 .cn-links line.hl{stroke:var(--red);stroke-width:2.5}
 .cn-links line.dim{opacity:.12}
 .cn-node{cursor:grab;transition:opacity .25s}
