@@ -513,6 +513,7 @@ main,section{scroll-margin-top:var(--nav-h)}
   position:relative;background:var(--bg-alt);
 }
 .scard__img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease), opacity .3s}
+.scard__img img.plotter{object-position:center 32%}
 .scard-link:hover .scard__img img{transform:scale(1.08)}
 
 /* Card image navigation arrows */
