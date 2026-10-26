@@ -635,19 +635,72 @@ main,section{scroll-margin-top:var(--nav-h)}
 .mapbadge .b2{font-size:.82rem;color:var(--muted);margin-top:3px}
 
 /* ============== FOOTER ============== */
-.footer{background:var(--dark);color:rgba(255,255,255,.7);padding:64px 0 32px}
-.footer__top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.12)}
-.footer__logo{max-width:280px;margin-bottom:16px}
-.footer__logo img{height:50px;width:auto;filter:brightness(0) invert(1)}
-.footer__about{max-width:340px;font-size:.92rem;margin-top:0}
-.footer h4{color:#fff;font-size:.95rem;margin-bottom:16px}
-.footer li{margin-bottom:10px;font-size:.9rem}
-.footer li a{transition:color .2s}
-.footer li a:hover{color:var(--amber)}
-.footer__bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding-top:24px;font-size:.82rem}
-.footer__socials{display:flex;gap:12px}
-.footer__socials a{width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;transition:all .25s}
-.footer__socials a:hover{background:var(--red);border-color:var(--red);transform:translateY(-3px)}
+.footer{
+  position:relative;
+  background:#070709 url("../img/footer/website-bg.webp") center/cover no-repeat;
+  color:rgba(255,255,255,.84);
+  padding:72px 0 28px;
+  overflow:hidden;
+}
+.footer::before{
+  content:"";
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.42);
+  pointer-events:none;
+}
+.footer .wrap{position:relative;z-index:1}
+.footer__top{
+  display:grid;
+  grid-template-columns:1fr minmax(240px,1.15fr) 1fr;
+  gap:36px 28px;
+  align-items:start;
+  padding-bottom:26px;
+  border-bottom:1px solid rgba(255,255,255,.35);
+}
+.footer__heading{
+  color:#fff;font-size:.78rem;letter-spacing:.24em;font-weight:600;margin-bottom:18px;
+}
+.footer__explore,.footer__contact{font-size:.84rem;letter-spacing:.03em;line-height:1.55}
+.footer__explore ul{display:flex;flex-direction:column;gap:10px}
+.footer__explore a,.footer__contact a{transition:color .2s}
+.footer__explore a:hover,.footer__contact a:hover{color:#fff}
+.footer__contact{text-align:right}
+.footer__contact p{margin:0 0 8px}
+.footer__address{max-width:280px;margin-left:auto}
+.footer__brand{text-align:center}
+.footer__mark{height:74px;width:auto;margin:0 auto 12px}
+.footer__name{
+  font-family:var(--font-display);text-transform:uppercase;letter-spacing:.16em;
+  color:#fff;font-size:clamp(.92rem,1.4vw,1.12rem);font-weight:600;line-height:1.3;
+}
+.footer__zh{
+  font-family:"Noto Serif TC",serif;color:rgba(255,255,255,.92);
+  letter-spacing:.46em;font-size:.95rem;margin-top:8px;
+}
+.footer__tag{margin-top:10px;font-size:.72rem;letter-spacing:.14em;color:rgba(255,255,255,.72)}
+.footer__bottom{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding-top:18px;font-size:.75rem;color:rgba(255,255,255,.66);
+}
+.footer__copy{margin:0}
+.footer__socials{display:flex;gap:10px}
+.footer__socials a{
+  width:38px;height:38px;border-radius:8px;
+  border:1px solid rgba(255,255,255,.72);color:#fff;
+  display:grid;place-items:center;
+  transition:background .2s,transform .2s;
+}
+.footer__socials a:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+.footer__red{font-family:var(--font-body);font-size:.62rem;font-weight:800;letter-spacing:.08em}
+@media (max-width:760px){
+  .footer{padding:48px 0 24px}
+  .footer__top{grid-template-columns:1fr;justify-items:center;text-align:center;gap:34px}
+  .footer__brand{order:-1}
+  .footer__explore,.footer__contact{text-align:center}
+  .footer__explore ul{align-items:center}
+  .footer__address{margin-left:auto;margin-right:auto}
+  .footer__bottom{flex-direction:column;align-items:center;text-align:center}
+}
 
 /* ============== FLOATING WHATSAPP ============== */
 .fab{
@@ -737,7 +790,6 @@ main,section{scroll-margin-top:var(--nav-h)}
   .services .grid{grid-template-columns:1fr}
   .facilities .grid{grid-template-columns:1fr}
   .pgallery{grid-template-columns:repeat(2,1fr);gap:10px}
-  .footer__top{grid-template-columns:1fr;gap:30px}
   .stats{grid-template-columns:1fr}
   .about-content{padding:60px 0}
   .about-content__headline{margin-bottom:40px}
@@ -803,9 +855,6 @@ main,section{scroll-margin-top:var(--nav-h)}
   .about-content__blocks--grid{grid-template-columns:1fr}
   .clientele .wrap{padding-left:8px;padding-right:8px}
 }
-/* Footer social image (Xiaohongshu rednote.png) */
-.footer__socials a img{width:20px;height:20px;object-fit:contain;display:block;filter:invert(1) brightness(1.15)}
-
 /* ============== GALLERY ADMIN MODE (?admin=1) ============== */
 body.admin-on{padding-bottom:76px}
 body.admin-on .fab{bottom:96px}
