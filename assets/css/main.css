@@ -651,13 +651,15 @@ main,section{scroll-margin-top:var(--nav-h)}
 .footer .wrap{
   position:relative;z-index:1;
   max-width:none;width:auto;
-  margin-left:17%;margin-right:10%;
+  margin-left:11%;margin-right:11%;
   padding:0;
 }
 .footer__top{
   display:grid;
-  grid-template-columns:minmax(0,.85fr) minmax(200px,1.05fr) minmax(300px,1.25fr);
-  gap:28px 32px;
+  /* Extra inset on Explore only: container starts at 11%, text at 17%. */
+  padding-left:calc(100% * 6 / 78);
+  grid-template-columns:max-content minmax(0,1fr) max-content;
+  gap:28px 36px;
   align-items:start;
   padding-bottom:26px;
   border-bottom:1px solid rgba(255,255,255,.35);
@@ -676,8 +678,9 @@ main,section{scroll-margin-top:var(--nav-h)}
 .footer__brand{text-align:center}
 .footer__mark{height:74px;width:auto;margin:0 auto 12px}
 .footer__name{
-  font-family:var(--font-display);text-transform:uppercase;letter-spacing:.16em;
-  color:#fff;font-size:clamp(.92rem,1.4vw,1.12rem);font-weight:600;line-height:1.3;
+  font-family:var(--font-display);text-transform:uppercase;letter-spacing:.12em;
+  color:#fff;font-size:clamp(.92rem,1.35vw,1.15rem);font-weight:600;line-height:1.3;
+  white-space:nowrap;
 }
 .footer__zh{
   font-family:"Noto Serif TC",serif;color:rgba(255,255,255,.92);
@@ -701,7 +704,8 @@ main,section{scroll-margin-top:var(--nav-h)}
 @media (max-width:760px){
   .footer{padding:48px 0 24px}
   .footer .wrap{margin-left:auto;margin-right:auto;max-width:var(--maxw);padding:0 24px}
-  .footer__top{grid-template-columns:1fr;justify-items:center;text-align:center;gap:34px}
+  .footer__top{padding-left:0;grid-template-columns:1fr;justify-items:center;text-align:center;gap:34px}
+  .footer__name{white-space:normal}
   .footer__brand{order:-1}
   .footer__explore,.footer__contact{text-align:center}
   .footer__explore ul{align-items:center}
