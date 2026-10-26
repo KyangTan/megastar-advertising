@@ -85,7 +85,7 @@ button{font-family:inherit;cursor:pointer}
   width:100%;max-width:none;margin:0;padding:0 24px;
 }
 .nav__logo{grid-column:1;justify-self:start;display:flex;align-items:center;text-decoration:none}
-.nav .btn{grid-column:3;justify-self:end}
+.nav .btn{grid-column:3;justify-self:end;height:68px;padding-top:0;padding-bottom:0;box-sizing:border-box}
 .nav .burger{grid-column:3;justify-self:end}
 .nav__logo img{height:68px;width:auto}
 .wordmark{
