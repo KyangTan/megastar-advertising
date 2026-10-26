@@ -790,52 +790,17 @@ main,section{scroll-margin-top:var(--nav-h)}
 }
 .filters-sticky.scrollable::after{opacity:1}
 
-/* ============== CLIENTELE (d3 force network) ============== */
+/* ============== TRUSTED BRANDS ============== */
 .clientele{background:var(--bg-alt)}
 .clientele .section-head{text-align:center;margin-left:auto;margin-right:auto}
-.clientele__stage{
-  position:relative;width:100%;
-  height:min(700px,76vh);min-height:520px;
-  border-radius:var(--radius-lg);
-  background:radial-gradient(circle at 50% 42%, #ffffff 0%, var(--bg-alt) 78%);
-  border:1px solid var(--line);overflow:hidden;
-  box-shadow:var(--shadow-card);
-}
-.clientele__network{position:absolute;inset:0}
-.clientele__reset{
-  position:absolute;top:14px;right:14px;z-index:6;
-  width:40px;height:40px;border-radius:50%;
-  background:#fff;border:1px solid var(--line);color:var(--ink-soft);
-  display:grid;place-items:center;cursor:pointer;
-  box-shadow:var(--shadow-card);
-  transition:transform .3s var(--ease), color .25s, border-color .25s;
-}
-.clientele__reset:hover{color:var(--red);border-color:var(--red);transform:rotate(-90deg)}
-.clientele__hint{
-  position:absolute;left:16px;bottom:14px;z-index:6;
-  font-size:.74rem;letter-spacing:.04em;color:var(--muted);
-  background:rgba(255,255,255,.7);backdrop-filter:blur(4px);
-  padding:6px 12px;border-radius:999px;border:1px solid var(--line);
-  pointer-events:none;
-}
-.cn-links line{stroke:rgba(15,23,42,.4);stroke-width:1.75;transition:stroke .25s, stroke-width .25s, opacity .25s}
-.cn-links line.hl{stroke:var(--red);stroke-width:2.5}
-.cn-links line.dim{opacity:.12}
-.cn-node{cursor:grab;transition:opacity .25s}
-.cn-node.dim{opacity:.22}
-.cn-node.dragging{cursor:grabbing}
-.cn-logo{filter:drop-shadow(0 3px 8px rgba(15,23,42,.14));transition:opacity .25s}
-.cn-node.dim .cn-logo{opacity:.25}
-.cn-center{fill:#000;stroke:#fff;stroke-width:3;filter:drop-shadow(0 8px 18px rgba(0,0,0,.45))}
-.cn-center-mark{pointer-events:none}
-.cn-center-badge{pointer-events:none;filter:drop-shadow(0 8px 16px rgba(0,0,0,.35))}
+.clientele__brands{margin:0 auto;width:100%}
+.clientele__brands img{width:100%;height:auto;margin:0 auto;border-radius:var(--radius-lg)}
 
 /* ============== CLIENTELE / ABOUT — responsive + a11y ============== */
 @media (max-width:760px){
   .hero{min-height:calc(70svh - var(--nav-h));padding:36px 0 60px}
   .about-content__blocks--grid{grid-template-columns:1fr}
   .clientele .wrap{padding-left:8px;padding-right:8px}
-  .clientele__stage{height:min(680px,86vh);min-height:520px}
 }
 /* Footer social image (Xiaohongshu rednote.png) */
 .footer__socials a img{width:20px;height:20px;object-fit:contain;display:block;filter:invert(1) brightness(1.15)}
