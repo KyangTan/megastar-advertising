@@ -513,6 +513,7 @@ main,section{scroll-margin-top:var(--nav-h)}
   position:relative;background:var(--bg-alt);
 }
 .scard__img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease), opacity .3s}
+.scard__img img.plotter{object-position:center 32%}
 .scard-link:hover .scard__img img{transform:scale(1.08)}
 
 /* Card image navigation arrows */
@@ -634,19 +635,85 @@ main,section{scroll-margin-top:var(--nav-h)}
 .mapbadge .b2{font-size:.82rem;color:var(--muted);margin-top:3px}
 
 /* ============== FOOTER ============== */
-.footer{background:var(--dark);color:rgba(255,255,255,.7);padding:64px 0 32px}
-.footer__top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.12)}
-.footer__logo{max-width:280px;margin-bottom:16px}
-.footer__logo img{height:50px;width:auto;filter:brightness(0) invert(1)}
-.footer__about{max-width:340px;font-size:.92rem;margin-top:0}
-.footer h4{color:#fff;font-size:.95rem;margin-bottom:16px}
-.footer li{margin-bottom:10px;font-size:.9rem}
-.footer li a{transition:color .2s}
-.footer li a:hover{color:var(--amber)}
-.footer__bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding-top:24px;font-size:.82rem}
-.footer__socials{display:flex;gap:12px}
-.footer__socials a{width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;transition:all .25s}
-.footer__socials a:hover{background:var(--red);border-color:var(--red);transform:translateY(-3px)}
+.footer{
+  position:relative;
+  background:#070709 url("../img/footer/website-bg.webp") center/cover no-repeat;
+  color:rgba(255,255,255,.84);
+  padding:72px 0 28px;
+  overflow:hidden;
+}
+.footer::before{
+  content:"";
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.42);
+  pointer-events:none;
+}
+.footer .wrap{
+  position:relative;z-index:1;
+  max-width:none;width:auto;
+  margin-left:11%;margin-right:11%;
+  padding:0;
+}
+.footer__top{
+  display:grid;
+  /* Extra inset on Explore only: container starts at 11%, text at 17%. */
+  padding-left:calc(100% * 6 / 78);
+  grid-template-columns:max-content minmax(0,1fr) max-content;
+  gap:28px 36px;
+  align-items:start;
+  padding-bottom:26px;
+  border-bottom:1px solid rgba(255,255,255,.35);
+}
+.footer__heading{
+  color:#fff;font-size:.78rem;letter-spacing:.24em;font-weight:600;margin-bottom:18px;
+}
+.footer__explore,.footer__contact{font-size:.84rem;letter-spacing:.03em;line-height:1.55}
+.footer__explore ul{display:flex;flex-direction:column;gap:10px}
+.footer__explore a,.footer__contact a{transition:color .2s}
+.footer__explore a:hover,.footer__contact a:hover{color:#fff}
+.footer__contact{text-align:right}
+.footer__contact p{margin:0 0 8px}
+.footer__address{max-width:none;margin:0 0 0 auto}
+.footer__address span{display:block;white-space:nowrap}
+.footer__brand{text-align:center}
+.footer__mark{height:74px;width:auto;margin:0 auto 12px}
+.footer__name{
+  font-family:var(--font-display);text-transform:uppercase;letter-spacing:.12em;
+  color:#fff;font-size:clamp(.92rem,1.35vw,1.15rem);font-weight:600;line-height:1.3;
+  white-space:nowrap;
+}
+.footer__zh{
+  font-family:"Noto Serif TC",serif;color:rgba(255,255,255,.92);
+  letter-spacing:.46em;font-size:.95rem;margin-top:8px;
+}
+.footer__tag{margin-top:10px;font-size:.72rem;letter-spacing:.14em;color:rgba(255,255,255,.72)}
+.footer__bottom{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding-top:18px;font-size:.75rem;color:rgba(255,255,255,.66);
+}
+.footer__copy{margin:0}
+.footer__socials{display:flex;gap:10px}
+.footer__socials a{
+  width:38px;height:38px;border-radius:8px;
+  border:1px solid rgba(255,255,255,.72);color:#fff;
+  display:grid;place-items:center;
+  transition:background .2s,transform .2s;
+}
+.footer__socials a:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+.footer__red{font-family:var(--font-body);font-size:.62rem;font-weight:800;letter-spacing:.08em}
+@media (max-width:760px){
+  .footer{padding:48px 0 24px}
+  .footer .wrap{margin-left:auto;margin-right:auto;max-width:var(--maxw);padding:0 24px}
+  .footer__top{padding-left:0;grid-template-columns:1fr;justify-items:center;text-align:center;gap:34px}
+  .footer__name{white-space:normal}
+  .footer__brand{order:-1}
+  .footer__explore,.footer__contact{text-align:center}
+  .footer__explore ul{align-items:center}
+  .footer__address{margin-left:auto;margin-right:auto}
+  .footer__address span{display:inline;white-space:normal}
+  .footer__address span + span::before{content:" "}
+  .footer__bottom{flex-direction:column;align-items:center;text-align:center}
+}
 
 /* ============== FLOATING WHATSAPP ============== */
 .fab{
@@ -736,7 +803,6 @@ main,section{scroll-margin-top:var(--nav-h)}
   .services .grid{grid-template-columns:1fr}
   .facilities .grid{grid-template-columns:1fr}
   .pgallery{grid-template-columns:repeat(2,1fr);gap:10px}
-  .footer__top{grid-template-columns:1fr;gap:30px}
   .stats{grid-template-columns:1fr}
   .about-content{padding:60px 0}
   .about-content__headline{margin-bottom:40px}
@@ -790,56 +856,18 @@ main,section{scroll-margin-top:var(--nav-h)}
 }
 .filters-sticky.scrollable::after{opacity:1}
 
-/* ============== CLIENTELE (d3 force network) ============== */
+/* ============== TRUSTED BRANDS ============== */
 .clientele{background:var(--bg-alt)}
 .clientele .section-head{text-align:center;margin-left:auto;margin-right:auto}
-.clientele__stage{
-  position:relative;width:100%;
-  height:min(700px,76vh);min-height:520px;
-  border-radius:var(--radius-lg);
-  background:radial-gradient(circle at 50% 42%, #ffffff 0%, var(--bg-alt) 78%);
-  border:1px solid var(--line);overflow:hidden;
-  box-shadow:var(--shadow-card);
-}
-.clientele__network{position:absolute;inset:0}
-.clientele__reset{
-  position:absolute;top:14px;right:14px;z-index:6;
-  width:40px;height:40px;border-radius:50%;
-  background:#fff;border:1px solid var(--line);color:var(--ink-soft);
-  display:grid;place-items:center;cursor:pointer;
-  box-shadow:var(--shadow-card);
-  transition:transform .3s var(--ease), color .25s, border-color .25s;
-}
-.clientele__reset:hover{color:var(--red);border-color:var(--red);transform:rotate(-90deg)}
-.clientele__hint{
-  position:absolute;left:16px;bottom:14px;z-index:6;
-  font-size:.74rem;letter-spacing:.04em;color:var(--muted);
-  background:rgba(255,255,255,.7);backdrop-filter:blur(4px);
-  padding:6px 12px;border-radius:999px;border:1px solid var(--line);
-  pointer-events:none;
-}
-.cn-links line{stroke:rgba(15,23,42,.4);stroke-width:1.75;transition:stroke .25s, stroke-width .25s, opacity .25s}
-.cn-links line.hl{stroke:var(--red);stroke-width:2.5}
-.cn-links line.dim{opacity:.12}
-.cn-node{cursor:grab;transition:opacity .25s}
-.cn-node.dim{opacity:.22}
-.cn-node.dragging{cursor:grabbing}
-.cn-logo{filter:drop-shadow(0 3px 8px rgba(15,23,42,.14));transition:opacity .25s}
-.cn-node.dim .cn-logo{opacity:.25}
-.cn-center{fill:#000;stroke:#fff;stroke-width:3;filter:drop-shadow(0 8px 18px rgba(0,0,0,.45))}
-.cn-center-mark{pointer-events:none}
-.cn-center-badge{pointer-events:none;filter:drop-shadow(0 8px 16px rgba(0,0,0,.35))}
+.clientele__brands{margin:0 auto;width:100%}
+.clientele__brands img{width:100%;height:auto;margin:0 auto;border-radius:var(--radius-lg)}
 
 /* ============== CLIENTELE / ABOUT — responsive + a11y ============== */
 @media (max-width:760px){
   .hero{min-height:calc(70svh - var(--nav-h));padding:36px 0 60px}
   .about-content__blocks--grid{grid-template-columns:1fr}
   .clientele .wrap{padding-left:8px;padding-right:8px}
-  .clientele__stage{height:min(680px,86vh);min-height:520px}
 }
-/* Footer social image (Xiaohongshu rednote.png) */
-.footer__socials a img{width:20px;height:20px;object-fit:contain;display:block;filter:invert(1) brightness(1.15)}
-
 /* ============== GALLERY ADMIN MODE (?admin=1) ============== */
 body.admin-on{padding-bottom:76px}
 body.admin-on .fab{bottom:96px}
