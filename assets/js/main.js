@@ -184,11 +184,21 @@
   var gallery = document.getElementById('gallery');
   var isGalleryPage = window.location.pathname.indexOf('gallery') > -1 || document.querySelector('.gallery-hero');
   var PORTFOLIO_DATA = null;
-  var activeFilter = 'all';
-  // Optional ?cat= deep-link to a pre-selected filter (gallery page)
+  var GALLERY_DEFAULT = 'combination-series';
+  var activeFilter = isGalleryPage ? GALLERY_DEFAULT : 'all';
+  // Optional ?cat= or #<slug> deep-link. The retired "all" filter maps to the gallery default.
   (function(){
     try {
       var cat = new URLSearchParams(window.location.search).get('cat');
+      if(!cat && window.location.hash){
+        var hash = decodeURIComponent(window.location.hash.replace(/^#/, ''));
+        if(hash.indexOf('cat=') === 0) hash = hash.slice(4);
+        if(hash && document.getElementById(hash) && !document.querySelector('.filter[data-filter="' + hash + '"]')){
+          hash = '';
+        }
+        if(hash) cat = hash;
+      }
+      if(cat === 'all') cat = isGalleryPage ? GALLERY_DEFAULT : 'all';
       if(cat && document.querySelector('.filter[data-filter="' + cat + '"]')){
         activeFilter = cat;
       }
@@ -481,11 +491,9 @@
           PORTFOLIO_DATA.items = curated;
         }
 
-        if(activeFilter !== 'all'){
-          document.querySelectorAll('.filter').forEach(function(b){
-            b.classList.toggle('active', b.getAttribute('data-filter') === activeFilter);
-          });
-        }
+        document.querySelectorAll('.filter').forEach(function(b){
+          b.classList.toggle('active', b.getAttribute('data-filter') === activeFilter);
+        });
         visibleCount = PAGE_SIZE;
         renderGallery();
 

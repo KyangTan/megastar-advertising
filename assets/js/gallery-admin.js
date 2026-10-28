@@ -581,7 +581,7 @@
   /* ---------- disabled tiles view ---------- */
   function activeFilter(){
     var b = document.querySelector('.filter.active');
-    return b ? b.getAttribute('data-filter') : 'all';
+    return b ? b.getAttribute('data-filter') : 'combination-series';
   }
 
   function renderDisabledTiles(){
